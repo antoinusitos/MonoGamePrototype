@@ -19,6 +19,8 @@ namespace MonoGamePrototype.Engine
 
         private SpriteFont font { get; set; } = null;
 
+        public Color color { get; set; } = Color.White;
+
         public EntityText(string aText)
         {
             text = aText;
@@ -45,7 +47,7 @@ namespace MonoGamePrototype.Engine
                     pos.X -= tempRight.X;
                     break;
             }
-            spriteBatch.DrawString(font, text, pos, Color.White);
+            spriteBatch.DrawString(font, text, pos, color);
             spriteBatch.End();
         }
     }

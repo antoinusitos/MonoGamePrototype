@@ -51,6 +51,8 @@ namespace MonoGamePrototype.Engine
             if (InputManager.instance.GetGamepadButtonDown(GamePad.GetState(PlayerIndex.One).Buttons.Back) || InputManager.instance.GetKeyboardDown(Keys.Escape))
                 Exit();
 
+            InputManager.instance.Update();
+
             currentLevel.Update(gameTime);
             // TODO: Add your update logic here
 
