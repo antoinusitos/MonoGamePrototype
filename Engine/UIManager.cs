@@ -50,17 +50,14 @@ namespace MonoGamePrototype.Engine
             }
         }
 
-        public void AddEntity(Entity entity, bool useInitAndLoad = true)
+        public void AddEntity(Entity entity)
         {
             if (entities.Contains(entity))
                 return;
 
             entities.Add(entity);
-            if (useInitAndLoad)
-            {
-                entity.Initialize();
-                entity.LoadContent(contentManager);
-            }
+            entity.Initialize();
+            entity.LoadContent(contentManager);
         }
 
         public void ClearEntities()

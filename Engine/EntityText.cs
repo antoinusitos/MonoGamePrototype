@@ -21,6 +21,8 @@ namespace MonoGamePrototype.Engine
 
         public Color color { get; set; } = Color.White;
 
+        public bool isLoaded { get; private set; } = false;
+
         public EntityText(string aText)
         {
             text = aText;
@@ -28,6 +30,7 @@ namespace MonoGamePrototype.Engine
 
         public override void LoadContent(ContentManager content)
         {
+            isLoaded = true;
             font = content.Load<SpriteFont>(Data.DataPath + "Font/Roboto-Bold-Title");
         }
 

@@ -5,16 +5,18 @@ using System.Collections.Generic;
 
 namespace MonoGamePrototype.Engine
 {
-    public class Level
+    public class Level : BaseBehaviour
     {
         public List<Entity> entities { get; set; } = null;
+
+        private ContentManager contentManager { get; set; } = null;
 
         public Level()
         {
             entities = new List<Entity>();
         }
 
-        public virtual void Initialize()
+        public override void Initialize()
         {
             for (int i = 0; i < entities.Count; i++)
             {
@@ -22,15 +24,17 @@ namespace MonoGamePrototype.Engine
             }
         }
 
-        public virtual void LoadContent(ContentManager content)
+        public override void LoadContent(ContentManager content)
         {
+            contentManager = content;
+
             for (int i = 0; i < entities.Count; i++)
             {
                 entities[i].LoadContent(content);
             }
         }
 
-        public virtual void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
             for(int i = 0; i < entities.Count; i++)
             {
@@ -38,12 +42,30 @@ namespace MonoGamePrototype.Engine
             }
         }
 
-        public virtual void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
             for (int i = 0; i < entities.Count; i++)
             {
                 entities[i].Draw(spriteBatch);
             }
+        }
+
+        public void AddEntity(Entity entity, bool useInitAndLoad = true)
+        {
+            if (entities.Contains(entity))
+                return;
+
+            entities.Add(entity);
+            if (useInitAndLoad)
+            {
+                entity.Initialize();
+                entity.LoadContent(contentManager);
+            }
+        }
+
+        public void ClearEntities()
+        {
+            entities.Clear();
         }
     }
 }

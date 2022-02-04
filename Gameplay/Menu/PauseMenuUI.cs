@@ -1,11 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using MonoGamePrototype.Engine;
-using System;
+using MonoGamePrototype.Gameplay.Levels;
 
 namespace MonoGamePrototype.Gameplay.Menu
 {
-    public class OptionMenuUI : UIMenu
+    public class PauseMenuUI : UIMenu
     {
         public override void Initialize()
         {
@@ -13,19 +13,19 @@ namespace MonoGamePrototype.Gameplay.Menu
 
             float offset = 150.0f;
 
-            entityTexts[0] = new EntityText("Option 1")
+            entityTexts[0] = new EntityText("Resume")
             {
                 position = new Vector2(Data.Width / 2.0f, Data.Height * 0.5f),
                 textAlign = TextAlign.CENTER
             };
 
-            entityTexts[1] = new EntityText("Option 2")
+            entityTexts[1] = new EntityText("Options")
             {
                 position = new Vector2(Data.Width / 2.0f, Data.Height * 0.5f + offset),
                 textAlign = TextAlign.CENTER
             };
 
-            entityTexts[2] = new EntityText("Back")
+            entityTexts[2] = new EntityText("Exit")
             {
                 position = new Vector2(Data.Width / 2.0f, Data.Height * 0.5f + offset * 2),
                 textAlign = TextAlign.CENTER
@@ -47,21 +47,29 @@ namespace MonoGamePrototype.Gameplay.Menu
 
         public override void Update(GameTime gameTime)
         {
+            if (!isActive)
+                return;
+
+            if (GameManager.instance.currentGameState != GameManager.GameState.PAUSE)
+                return;
+
             base.Update(gameTime);
 
             if (InputManager.instance.GetKeyboardPressed(Keys.Enter))
             {
                 if (menuIndex == 0)
                 {
-                    Console.WriteLine("Option 1");
+                    SetActive(false);
+                    GameManager.instance.SetGameState(GameManager.GameState.GAME);
                 }
                 else if (menuIndex == 1)
                 {
-                    Console.WriteLine("Option 2");
                 }
                 else if (menuIndex == 2)
                 {
-                    currentLevel.BackToPreviousMenu();
+                    UIManager.instance.ClearEntities();
+                    GameManager.instance.SetGameState(GameManager.GameState.MENU);
+                    SceneManager.instance.SetLevel(new LevelMenu());
                 }
             }
         }

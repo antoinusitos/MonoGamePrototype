@@ -27,6 +27,12 @@ namespace MonoGamePrototype.Gameplay.Levels
             mainMenuUI.currentLevel = this;
         }
 
+        public override void Start()
+        {
+            base.Start();
+            mainMenuUI.Start();
+        }
+
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);

@@ -12,13 +12,12 @@ namespace MonoGamePrototype.Engine
 
         private ContentManager contentManager { get; set; } = null;
 
-        public void SetLevel(Level aLevel, bool useInit = true)
+        public void SetLevel(Level aLevel)
         {
             currentLevel = aLevel;
-            if (!useInit)
-                return;
             currentLevel.Initialize();
             currentLevel.LoadContent(contentManager);
+            currentLevel.Start();
         }
 
         public override void Initialize()

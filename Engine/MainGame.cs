@@ -18,7 +18,11 @@ namespace MonoGamePrototype.Engine
 
         private SceneManager sceneManager { get; set; } = null;
 
+        private GameManager gameManager { get; set; } = null;
+
         private Level currentLevel { get; set; } = null;
+
+        private bool started { get; set; } = false;
 
         public MainGame()
         {
@@ -31,9 +35,9 @@ namespace MonoGamePrototype.Engine
             inputManager = new InputManager();
             uiManager = new UIManager();
             sceneManager = new SceneManager();
+            gameManager = new GameManager();
 
             currentLevel = new LevelMenu();
-            sceneManager.SetLevel(currentLevel, false);
         }
 
         protected override void Initialize()
@@ -48,6 +52,7 @@ namespace MonoGamePrototype.Engine
             inputManager.Initialize();
             uiManager.Initialize();
             sceneManager.Initialize();
+            gameManager.Initialize();
 
             currentLevel.Initialize();
 
@@ -61,12 +66,31 @@ namespace MonoGamePrototype.Engine
             inputManager.LoadContent(Content);
             uiManager.LoadContent(Content);
             sceneManager.LoadContent(Content);
+            gameManager.LoadContent(Content);
 
             // TODO: use this.Content to load your game content here
         }
 
         protected override void Update(GameTime gameTime)
         {
+            if(!started)
+            {
+                gameManager.Start();
+
+                inputManager.Start();
+
+                sceneManager.Start();
+
+                uiManager.Start();
+
+                sceneManager.SetLevel(currentLevel);
+
+                started = true;
+                return;
+            }
+
+            gameManager.Update(gameTime);
+
             inputManager.Update(gameTime);
 
             sceneManager.Update(gameTime);

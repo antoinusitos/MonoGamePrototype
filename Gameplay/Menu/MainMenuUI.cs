@@ -21,25 +21,31 @@ namespace MonoGamePrototype.Gameplay.Menu
                 position = new Vector2(Data.Width / 2.0f, Data.Height * 0.5f),
                 textAlign = TextAlign.CENTER
             };
-            UIManager.instance.AddEntity(entityTexts[0], false);
 
             entityTexts[1] = new EntityText("Options")
             {
                 position = new Vector2(Data.Width / 2.0f, Data.Height * 0.5f + offset),
                 textAlign = TextAlign.CENTER
             };
-            UIManager.instance.AddEntity(entityTexts[1], false);
 
             entityTexts[2] = new EntityText("Exit")
             {
                 position = new Vector2(Data.Width / 2.0f, Data.Height * 0.5f + offset * 2),
                 textAlign = TextAlign.CENTER
             };
-            UIManager.instance.AddEntity(entityTexts[2], false);
 
             entityTexts[menuIndex].color = Color.Red;
 
             base.Initialize();
+        }
+
+        public override void Start()
+        {
+            base.Start();
+
+            UIManager.instance.AddEntity(entityTexts[0]);
+            UIManager.instance.AddEntity(entityTexts[1]);
+            UIManager.instance.AddEntity(entityTexts[2]);
         }
 
         public override void Update(GameTime gameTime)
@@ -51,6 +57,8 @@ namespace MonoGamePrototype.Gameplay.Menu
                 if (menuIndex == 0)
                 {
                     UIManager.instance.ClearEntities();
+                    GameManager.instance.SetGameState(GameManager.GameState.GAME);
+                    FirstLevel firstLevel = new FirstLevel();
                     SceneManager.instance.SetLevel(new FirstLevel());
                 }
                 else if (menuIndex == 1)
@@ -59,6 +67,7 @@ namespace MonoGamePrototype.Gameplay.Menu
                     {
                         optionMenuUI = new OptionMenuUI();
                         optionMenuUI.Initialize();
+                        optionMenuUI.Start();
                         optionMenuUI.currentLevel = currentLevel;
                     }
                     currentLevel.SetCurrentMenu(optionMenuUI);

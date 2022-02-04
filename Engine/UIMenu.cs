@@ -6,7 +6,7 @@ using MonoGamePrototype.Gameplay.Levels;
 
 namespace MonoGamePrototype.Engine
 {
-    public class UIMenu
+    public class UIMenu : BaseBehaviour
     {
         public bool isActive { get; set; } = true;
         public LevelMenu currentLevel { get; set; } = null;
@@ -15,16 +15,8 @@ namespace MonoGamePrototype.Engine
 
         protected EntityText[] entityTexts { get; set; } = null;
 
-        public virtual void Initialize()
-        {
-        }
 
-        public virtual void LoadContent(ContentManager content)
-        {
-
-        }
-
-        public virtual void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
             bool needUpdate = false;
             int increment = 0;
@@ -45,11 +37,6 @@ namespace MonoGamePrototype.Engine
                 menuIndex += increment;
                 entityTexts[menuIndex].color = Color.Red;
             }
-        }
-
-        public virtual void Draw(SpriteBatch spriteBatch)
-        {
-
         }
 
         public virtual void SetActive(bool aState)
