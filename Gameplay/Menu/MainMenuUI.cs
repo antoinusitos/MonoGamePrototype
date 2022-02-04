@@ -1,17 +1,14 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using MonoGamePrototype.Engine;
+using MonoGamePrototype.Gameplay.Levels;
 using System;
 
 namespace MonoGamePrototype.Gameplay.Menu
 {
     public class MainMenuUI : UIMenu
     {
-
-        private int menuIndex { get; set; } = 0;
-
-        private EntityText[] entityTexts { get; set; } = null;
-
+        private OptionMenuUI optionMenuUI { get; set; } = null;
 
         public override void Initialize()
         {
@@ -24,21 +21,21 @@ namespace MonoGamePrototype.Gameplay.Menu
                 position = new Vector2(Data.Width / 2.0f, Data.Height * 0.5f),
                 textAlign = TextAlign.CENTER
             };
-            UIManager.instance.AddEntity(entityTexts[0]);
+            UIManager.instance.AddEntity(entityTexts[0], false);
 
             entityTexts[1] = new EntityText("Options")
             {
                 position = new Vector2(Data.Width / 2.0f, Data.Height * 0.5f + offset),
                 textAlign = TextAlign.CENTER
             };
-            UIManager.instance.AddEntity(entityTexts[1]);
+            UIManager.instance.AddEntity(entityTexts[1], false);
 
             entityTexts[2] = new EntityText("Exit")
             {
                 position = new Vector2(Data.Width / 2.0f, Data.Height * 0.5f + offset * 2),
                 textAlign = TextAlign.CENTER
             };
-            UIManager.instance.AddEntity(entityTexts[2]);
+            UIManager.instance.AddEntity(entityTexts[2], false);
 
             entityTexts[menuIndex].color = Color.Red;
 
@@ -47,35 +44,24 @@ namespace MonoGamePrototype.Gameplay.Menu
 
         public override void Update(GameTime gameTime)
         {
-            bool needUpdate = false;
-            int increment = 0;
-            if (InputManager.instance.GetKeyboardPressed(Keys.Z) && menuIndex > 0)
-            {
-                increment--;
-                needUpdate = true;
-            }
-            else if (InputManager.instance.GetKeyboardPressed(Keys.S) && menuIndex < 2)
-            {
-                increment++;
-                needUpdate = true;
-            }
-
-            if (needUpdate)
-            {
-                entityTexts[menuIndex].color = Color.White;
-                menuIndex += increment;
-                entityTexts[menuIndex].color = Color.Red;
-            }
+            base.Update(gameTime);
 
             if (InputManager.instance.GetKeyboardPressed(Keys.Enter))
             {
                 if (menuIndex == 0)
                 {
-                    Console.WriteLine("New Game");
+                    UIManager.instance.ClearEntities();
+                    SceneManager.instance.SetLevel(new FirstLevel());
                 }
                 else if (menuIndex == 1)
                 {
-                    Console.WriteLine("Options");
+                    if (optionMenuUI == null)
+                    {
+                        optionMenuUI = new OptionMenuUI();
+                        optionMenuUI.Initialize();
+                        optionMenuUI.currentLevel = currentLevel;
+                    }
+                    currentLevel.SetCurrentMenu(optionMenuUI);
                 }
                 else if (menuIndex == 2)
                 {

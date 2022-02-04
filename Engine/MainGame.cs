@@ -16,6 +16,8 @@ namespace MonoGamePrototype.Engine
 
         private UIManager uiManager { get; set; } = null;
 
+        private SceneManager sceneManager { get; set; } = null;
+
         private Level currentLevel { get; set; } = null;
 
         public MainGame()
@@ -28,7 +30,10 @@ namespace MonoGamePrototype.Engine
 
             inputManager = new InputManager();
             uiManager = new UIManager();
+            sceneManager = new SceneManager();
+
             currentLevel = new LevelMenu();
+            sceneManager.SetLevel(currentLevel, false);
         }
 
         protected override void Initialize()
@@ -42,6 +47,7 @@ namespace MonoGamePrototype.Engine
 
             inputManager.Initialize();
             uiManager.Initialize();
+            sceneManager.Initialize();
 
             currentLevel.Initialize();
 
@@ -54,8 +60,7 @@ namespace MonoGamePrototype.Engine
 
             inputManager.LoadContent(Content);
             uiManager.LoadContent(Content);
-
-            currentLevel.LoadContent(Content);
+            sceneManager.LoadContent(Content);
 
             // TODO: use this.Content to load your game content here
         }
@@ -64,7 +69,7 @@ namespace MonoGamePrototype.Engine
         {
             inputManager.Update(gameTime);
 
-            currentLevel.Update(gameTime);
+            sceneManager.Update(gameTime);
 
             uiManager.Update(gameTime);
             // TODO: Add your update logic here
@@ -76,7 +81,7 @@ namespace MonoGamePrototype.Engine
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            currentLevel.Draw(spriteBatch);
+            sceneManager.Draw(spriteBatch);
 
             uiManager.Draw(spriteBatch);
             // TODO: Add your drawing code here

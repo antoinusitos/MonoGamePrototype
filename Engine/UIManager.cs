@@ -1,9 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace MonoGamePrototype.Engine
 {
@@ -34,6 +32,9 @@ namespace MonoGamePrototype.Engine
         {
             for (int i = 0; i < entities.Count; i++)
             {
+                if (!entities[i].isActive)
+                    continue;
+
                 entities[i].Update(gameTime);
             }
         }
@@ -42,18 +43,29 @@ namespace MonoGamePrototype.Engine
         {
             for (int i = 0; i < entities.Count; i++)
             {
+                if (!entities[i].isActive)
+                    continue;
+
                 entities[i].Draw(spriteBatch);
             }
         }
 
-        public void AddEntity(Entity entity)
+        public void AddEntity(Entity entity, bool useInitAndLoad = true)
         {
             if (entities.Contains(entity))
                 return;
 
             entities.Add(entity);
-            entity.Initialize();
-            entity.LoadContent(contentManager);
+            if (useInitAndLoad)
+            {
+                entity.Initialize();
+                entity.LoadContent(contentManager);
+            }
+        }
+
+        public void ClearEntities()
+        {
+            entities.Clear();
         }
     }
 }
