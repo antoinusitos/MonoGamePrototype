@@ -45,5 +45,10 @@ namespace MonoGamePrototype.Engine
         {
             return button == ButtonState.Pressed;
         }
+
+        public Vector2 GetMousePosition()
+        {
+            return Mouse.GetState().Position.ToVector2();
+        }
     }
 }

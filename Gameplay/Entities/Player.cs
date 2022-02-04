@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGamePrototype.Engine;
+using System;
 
 namespace MonoGamePrototype.Gameplay.Entities
 {
@@ -44,6 +45,9 @@ namespace MonoGamePrototype.Gameplay.Entities
             {
                 position += Vector2.UnitY * gameTime.ElapsedGameTime.Milliseconds * speed;
             }
+
+            Vector2 mousePos = InputManager.instance.GetMousePosition();
+            Console.WriteLine("Mouse pos delta" + (position - mousePos));
         }
 
         public override void Draw(SpriteBatch spriteBatch)
