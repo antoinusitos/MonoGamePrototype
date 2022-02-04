@@ -28,7 +28,7 @@ namespace MonoGamePrototype.Engine
 
         public override void LoadContent(ContentManager content)
         {
-            font = content.Load<SpriteFont>(Data.DataPath + "Font/Roboto-Bold");
+            font = content.Load<SpriteFont>(Data.DataPath + "Font/Roboto-Bold-Title");
         }
 
         public override void Draw(SpriteBatch spriteBatch)

@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Input;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 
 namespace MonoGamePrototype.Engine
 {
@@ -14,7 +15,7 @@ namespace MonoGamePrototype.Engine
             instance = this;
         }
 
-        public void Update()
+        public override void Update(GameTime gameTime)
         {
             previousState = currentState;
             currentState = Keyboard.GetState();

@@ -20,6 +20,13 @@
 /processorParam:TextureFormat=Compressed
 /build:Assets/PNG/Font/Roboto-Bold.spritefont
 
+#begin Assets/PNG/Font/Roboto-Bold-Title.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Assets/PNG/Font/Roboto-Bold-Title.spritefont
+
 #begin Assets/PNG/Font/Roboto-Regular.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
