@@ -1,5 +1,13 @@
 ﻿Shoot
 Enemies
 Background
-Render sprite depending on the Z pos
 Level Editor
+Load and Save Levels
+Test of Level
+Loot
+Inventory
+Dialog
+Quest
+Narration
+House (with upper floor)
+AI

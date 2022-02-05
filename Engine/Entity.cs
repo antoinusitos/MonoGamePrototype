@@ -10,5 +10,6 @@ namespace MonoGamePrototype.Engine
         public Vector2 position { get; set; } = Vector2.Zero;
         public Vector2 rotation { get; set; } = Vector2.Zero;
         public Vector2 scale { get; set; } = Vector2.One;
+        public int zOrder { get; set; } = 0;
     }
 }

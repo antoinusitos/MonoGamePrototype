@@ -44,8 +44,8 @@ namespace MonoGamePrototype.Gameplay.Levels
             pauseMenuUI.Start();
             pauseMenuUI.SetActive(false);
 
-            AddEntity(testEntity);
             AddEntity(player);
+            AddEntity(testEntity);
 
         }
 

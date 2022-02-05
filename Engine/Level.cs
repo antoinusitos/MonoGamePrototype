@@ -50,17 +50,33 @@ namespace MonoGamePrototype.Engine
             }
         }
 
-        public void AddEntity(Entity entity, bool useInitAndLoad = true)
+        public void AddEntity(Entity entity)
         {
             if (entities.Contains(entity))
                 return;
 
-            entities.Add(entity);
-            if (useInitAndLoad)
+            if(entities.Count == 0)
+                entities.Add(entity);
+            else
             {
-                entity.Initialize();
-                entity.LoadContent(contentManager);
+                bool added = false;
+                for(int i = 0; i < entities.Count; i++)
+                {
+                    if(entities[i].zOrder > entity.zOrder)
+                    {
+                        added = true;
+                        entities.Insert(i, entity);
+                        break;
+                    }
+                }
+                if(!added)
+                {
+                    entities.Add(entity);
+                }
             }
+
+            entity.Initialize();
+            entity.LoadContent(contentManager);
         }
 
         public void ClearEntities()

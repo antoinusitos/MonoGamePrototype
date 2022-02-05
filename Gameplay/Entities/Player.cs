@@ -15,7 +15,7 @@ namespace MonoGamePrototype.Gameplay.Entities
 
         public override void Initialize()
         {
-
+            zOrder = 1;
         }
 
         public override void LoadContent(ContentManager content)

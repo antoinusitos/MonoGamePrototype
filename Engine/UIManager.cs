@@ -55,7 +55,26 @@ namespace MonoGamePrototype.Engine
             if (entities.Contains(entity))
                 return;
 
-            entities.Add(entity);
+            if (entities.Count == 0)
+                entities.Add(entity);
+            else
+            {
+                bool added = false;
+                for (int i = 0; i < entities.Count; i++)
+                {
+                    if (entities[i].zOrder > entity.zOrder)
+                    {
+                        added = true;
+                        entities.Insert(i, entity);
+                        break;
+                    }
+                }
+                if (!added)
+                {
+                    entities.Add(entity);
+                }
+            }
+
             entity.Initialize();
             entity.LoadContent(contentManager);
         }
