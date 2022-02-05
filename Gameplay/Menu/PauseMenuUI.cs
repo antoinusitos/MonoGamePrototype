@@ -25,7 +25,7 @@ namespace MonoGamePrototype.Gameplay.Menu
                 textAlign = TextAlign.CENTER
             };
 
-            entityTexts[2] = new EntityText("Exit")
+            entityTexts[2] = new EntityText("Main Menu")
             {
                 position = new Vector2(Data.Width / 2.0f, Data.Height * 0.5f + offset * 2),
                 textAlign = TextAlign.CENTER

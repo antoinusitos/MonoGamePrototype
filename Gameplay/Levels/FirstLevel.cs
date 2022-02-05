@@ -14,13 +14,19 @@ namespace MonoGamePrototype.Gameplay.Levels
 
         private PauseMenuUI pauseMenuUI { get; set; } = null;
 
+        private TestEntity testEntity { get; set; } = null;
+
         public override void Initialize()
         {
             player = new Player();
-            AddEntity(player, false);
+
+            testEntity = new TestEntity();
 
             pauseMenuUI = new PauseMenuUI();
             pauseMenuUI.Initialize();
+
+            CameraManager.instance.SetCamera(new PlayerCamera());
+            ((PlayerCamera)CameraManager.instance.currentCamera).SetPlayer(player);
 
             base.Initialize();
         }
@@ -37,6 +43,10 @@ namespace MonoGamePrototype.Gameplay.Levels
 
             pauseMenuUI.Start();
             pauseMenuUI.SetActive(false);
+
+            AddEntity(testEntity);
+            AddEntity(player);
+
         }
 
         public override void Update(GameTime gameTime)

@@ -20,6 +20,8 @@ namespace MonoGamePrototype.Engine
 
         private GameManager gameManager { get; set; } = null;
 
+        private CameraManager cameraManager { get; set; } = null;
+
         private Level currentLevel { get; set; } = null;
 
         private bool started { get; set; } = false;
@@ -36,6 +38,7 @@ namespace MonoGamePrototype.Engine
             uiManager = new UIManager();
             sceneManager = new SceneManager();
             gameManager = new GameManager();
+            cameraManager = new CameraManager();
 
             currentLevel = new LevelMenu();
         }
@@ -53,6 +56,7 @@ namespace MonoGamePrototype.Engine
             uiManager.Initialize();
             sceneManager.Initialize();
             gameManager.Initialize();
+            cameraManager.Initialize();
 
             currentLevel.Initialize();
 
@@ -67,6 +71,7 @@ namespace MonoGamePrototype.Engine
             uiManager.LoadContent(Content);
             sceneManager.LoadContent(Content);
             gameManager.LoadContent(Content);
+            cameraManager.LoadContent(Content);
 
             // TODO: use this.Content to load your game content here
         }
@@ -85,6 +90,8 @@ namespace MonoGamePrototype.Engine
 
                 sceneManager.SetLevel(currentLevel);
 
+                cameraManager.Start();
+
                 started = true;
                 return;
             }
@@ -94,6 +101,8 @@ namespace MonoGamePrototype.Engine
             inputManager.Update(gameTime);
 
             sceneManager.Update(gameTime);
+
+            cameraManager.Update(gameTime);
 
             uiManager.Update(gameTime);
             // TODO: Add your update logic here
@@ -105,7 +114,16 @@ namespace MonoGamePrototype.Engine
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            sceneManager.Draw(spriteBatch);
+            if (CameraManager.instance.currentCamera != null)
+            {
+                spriteBatch.Begin(transformMatrix: CameraManager.instance.currentCamera.transform);
+                sceneManager.Draw(spriteBatch);
+                spriteBatch.End();
+            }
+            else
+            {
+                sceneManager.Draw(spriteBatch);
+            }
 
             uiManager.Draw(spriteBatch);
             // TODO: Add your drawing code here

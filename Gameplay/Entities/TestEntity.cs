@@ -14,35 +14,12 @@ namespace MonoGamePrototype.Gameplay.Entities
 
         public override void LoadContent(ContentManager content)
         {
-            texture = content.Load<Texture2D>(Data.DataPath + "Hitman 1/hitman1_gun");
-        }
-
-        public override void Update(GameTime gameTime)
-        {
-            if(InputManager.instance.GetKeyboardDown(Keys.D))
-            {
-                position += Vector2.UnitX * gameTime.ElapsedGameTime.Milliseconds * speed;
-            }
-            else if (InputManager.instance.GetKeyboardDown(Keys.Q))
-            {
-                position -= Vector2.UnitX * gameTime.ElapsedGameTime.Milliseconds * speed;
-            }
-
-            if (InputManager.instance.GetKeyboardDown(Keys.Z))
-            {
-                position -= Vector2.UnitY * gameTime.ElapsedGameTime.Milliseconds * speed;
-            }
-            else if (InputManager.instance.GetKeyboardDown(Keys.S))
-            {
-                position += Vector2.UnitY * gameTime.ElapsedGameTime.Milliseconds * speed;
-            }
+            texture = content.Load<Texture2D>(Data.DataPath + "Tiles/tile_01");
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Begin();
             spriteBatch.Draw(texture, position, Color.White);
-            spriteBatch.End();
         }
     }
 }
