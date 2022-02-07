@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGamePrototype.Gameplay.Levels;
+using System;
 
 namespace MonoGamePrototype.Engine
 {
@@ -26,9 +27,14 @@ namespace MonoGamePrototype.Engine
 
         private bool started { get; set; } = false;
 
+        private System.Diagnostics.Stopwatch startTime { get; set; } = null;
+
         public MainGame()
         {
             instance = this;
+
+            startTime = new System.Diagnostics.Stopwatch();
+            startTime.Start();
 
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -40,7 +46,7 @@ namespace MonoGamePrototype.Engine
             gameManager = new GameManager();
             cameraManager = new CameraManager();
 
-            currentLevel = new LevelMenu();
+            currentLevel = new LevelMenu("Main Menu");
         }
 
         protected override void Initialize()
@@ -93,6 +99,9 @@ namespace MonoGamePrototype.Engine
                 cameraManager.Start();
 
                 started = true;
+
+                startTime.Stop();
+                Console.WriteLine($"GAME start Time: {startTime.ElapsedMilliseconds} ms");
                 return;
             }
 
@@ -114,16 +123,28 @@ namespace MonoGamePrototype.Engine
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
+            
+
             if (CameraManager.instance.currentCamera != null)
             {
+                var watch = new System.Diagnostics.Stopwatch();
+
+                watch.Start();
+
                 spriteBatch.Begin(transformMatrix: CameraManager.instance.currentCamera.transform);
                 sceneManager.Draw(spriteBatch);
                 spriteBatch.End();
+
+                watch.Stop();
+
+                //Console.WriteLine($"Execution Time: {watch.ElapsedMilliseconds} ms");
             }
             else
             {
                 sceneManager.Draw(spriteBatch);
             }
+
+            
 
             uiManager.Draw(spriteBatch);
             // TODO: Add your drawing code here

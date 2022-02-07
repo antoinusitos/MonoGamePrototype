@@ -69,7 +69,7 @@ namespace MonoGamePrototype.Gameplay.Menu
                 {
                     UIManager.instance.ClearEntities();
                     GameManager.instance.SetGameState(GameManager.GameState.MENU);
-                    SceneManager.instance.SetLevel(new LevelMenu());
+                    SceneManager.instance.SetLevel(new LevelMenu("Main menu"));
                 }
             }
         }

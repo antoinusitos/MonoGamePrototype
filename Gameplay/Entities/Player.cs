@@ -47,7 +47,6 @@ namespace MonoGamePrototype.Gameplay.Entities
             }
 
             Vector2 mousePos = InputManager.instance.GetMousePosition();
-            Console.WriteLine("Mouse pos delta" + (position - mousePos));
         }
 
         public override void Draw(SpriteBatch spriteBatch)

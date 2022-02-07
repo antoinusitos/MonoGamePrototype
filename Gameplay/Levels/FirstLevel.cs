@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Input;
 using MonoGamePrototype.Engine;
 using MonoGamePrototype.Gameplay.Entities;
 using MonoGamePrototype.Gameplay.Menu;
+using System;
 
 namespace MonoGamePrototype.Gameplay.Levels
 {
@@ -14,13 +15,28 @@ namespace MonoGamePrototype.Gameplay.Levels
 
         private PauseMenuUI pauseMenuUI { get; set; } = null;
 
-        private TestEntity testEntity { get; set; } = null;
+        private Tile tile { get; set; } = null;
+
+        //DEBUG
+        private Tile[] testTiles { get; set; } = new Tile[10000];
+        //DEBUG
+
+
+        public FirstLevel(string name) : base(name)
+        {
+
+        }
 
         public override void Initialize()
         {
             player = new Player();
 
-            testEntity = new TestEntity();
+            tile = new Tile("Tiles/tile_01");
+
+            for(int i = 0; i < testTiles.Length; i++)
+            {
+                testTiles[i] = new Tile("Tiles/tile_01");
+            }
 
             pauseMenuUI = new PauseMenuUI();
             pauseMenuUI.Initialize();
@@ -45,8 +61,11 @@ namespace MonoGamePrototype.Gameplay.Levels
             pauseMenuUI.SetActive(false);
 
             AddEntity(player);
-            AddEntity(testEntity);
-
+            AddEntity(tile);
+            for (int i = 0; i < testTiles.Length; i++)
+            {
+                AddEntity(testTiles[i]);
+            }
         }
 
         public override void Update(GameTime gameTime)

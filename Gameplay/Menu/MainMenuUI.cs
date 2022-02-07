@@ -58,8 +58,8 @@ namespace MonoGamePrototype.Gameplay.Menu
                 {
                     UIManager.instance.ClearEntities();
                     GameManager.instance.SetGameState(GameManager.GameState.GAME);
-                    FirstLevel firstLevel = new FirstLevel();
-                    SceneManager.instance.SetLevel(new FirstLevel());
+                    FirstLevel firstLevel = new FirstLevel("First Level");
+                    SceneManager.instance.SetLevel(firstLevel);
                 }
                 else if (menuIndex == 1)
                 {

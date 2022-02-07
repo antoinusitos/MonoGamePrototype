@@ -11,7 +11,7 @@ namespace MonoGamePrototype.Gameplay.Levels
         private UIMenu currentMenu { get; set; } = null;
         private UIMenu previousMenu { get; set; } = null;
 
-        public LevelMenu()
+        public LevelMenu(string name) : base(name)
         {
             mainMenuUI = new MainMenuUI();
 
