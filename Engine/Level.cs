@@ -108,7 +108,10 @@ namespace MonoGamePrototype.Engine
 
         public void ClearEntities()
         {
-            entities.Clear();
+            foreach (KeyValuePair<int, List<Entity>> pair in entities)
+            {
+                pair.Value.Clear();
+            }
         }
     }
 }
