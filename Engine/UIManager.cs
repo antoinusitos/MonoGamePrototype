@@ -16,7 +16,13 @@ namespace MonoGamePrototype.Engine
         public override void Initialize()
         {
             instance = this;
-            entities = new Dictionary<int, List<Entity>>();
+            entities = new Dictionary<int, List<Entity>>
+            {
+                { 0, new List<Entity>() },
+                { 1, new List<Entity>() },
+                { 2, new List<Entity>() },
+                { 3, new List<Entity>() }
+            };
         }
 
         public override void LoadContent(ContentManager content)

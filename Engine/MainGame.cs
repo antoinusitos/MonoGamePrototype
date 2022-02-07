@@ -23,6 +23,8 @@ namespace MonoGamePrototype.Engine
 
         private CameraManager cameraManager { get; set; } = null;
 
+        private LevelLoadingManager levelLoadingManager { get; set; } = null;
+
         private Level currentLevel { get; set; } = null;
 
         private bool started { get; set; } = false;
@@ -45,6 +47,7 @@ namespace MonoGamePrototype.Engine
             sceneManager = new SceneManager();
             gameManager = new GameManager();
             cameraManager = new CameraManager();
+            levelLoadingManager = new LevelLoadingManager();
 
             currentLevel = new LevelMenu("Main Menu");
         }
@@ -63,6 +66,7 @@ namespace MonoGamePrototype.Engine
             sceneManager.Initialize();
             gameManager.Initialize();
             cameraManager.Initialize();
+            levelLoadingManager.Initialize();
 
             currentLevel.Initialize();
 
@@ -123,28 +127,16 @@ namespace MonoGamePrototype.Engine
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            
-
             if (CameraManager.instance.currentCamera != null)
             {
-                var watch = new System.Diagnostics.Stopwatch();
-
-                watch.Start();
-
                 spriteBatch.Begin(transformMatrix: CameraManager.instance.currentCamera.transform);
                 sceneManager.Draw(spriteBatch);
                 spriteBatch.End();
-
-                watch.Stop();
-
-                //Console.WriteLine($"Execution Time: {watch.ElapsedMilliseconds} ms");
             }
             else
             {
                 sceneManager.Draw(spriteBatch);
             }
-
-            
 
             uiManager.Draw(spriteBatch);
             // TODO: Add your drawing code here
