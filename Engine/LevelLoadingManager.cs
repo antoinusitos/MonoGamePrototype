@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text.Json;
 
 namespace MonoGamePrototype.Engine
 {
@@ -14,9 +15,9 @@ namespace MonoGamePrototype.Engine
             instance = this;
         }
 
-        public string[] LoadLevel(string levelName)
+        public string[] LoadLevelText(string levelName)
         {
-            string path = Directory.GetCurrentDirectory() + "\\Content\\Assets\\Levels\\" + levelName;
+            string path = Data.LevelPath + levelName;
             string[] lines = File.ReadAllLines(path);
 
             return lines;
@@ -30,6 +31,13 @@ namespace MonoGamePrototype.Engine
             }
 
             return lines;
+        }
+
+        public Tile[] LoadLevel(string levelName)
+        {
+            string fileName = Data.LevelPath + levelName;
+            string jsonString = File.ReadAllText(fileName);
+            return JsonSerializer.Deserialize<Tile[]>(jsonString);
         }
     }
 }

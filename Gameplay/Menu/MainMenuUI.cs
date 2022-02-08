@@ -18,19 +18,22 @@ namespace MonoGamePrototype.Gameplay.Menu
 
             entityTexts[0] = new EntityText("New Game")
             {
-                position = new Vector2(Data.Width / 2.0f, Data.Height * 0.5f),
+                positionX = Data.Width / 2.0f,
+                positionY = Data.Height * 0.5f,
                 textAlign = TextAlign.CENTER
             };
 
             entityTexts[1] = new EntityText("Options")
             {
-                position = new Vector2(Data.Width / 2.0f, Data.Height * 0.5f + offset),
+                positionX = Data.Width / 2.0f,
+                positionY = Data.Height * 0.5f + offset,
                 textAlign = TextAlign.CENTER
             };
 
             entityTexts[2] = new EntityText("Exit")
             {
-                position = new Vector2(Data.Width / 2.0f, Data.Height * 0.5f + offset * 2),
+                positionX = Data.Width / 2.0f,
+                positionY = Data.Height * 0.5f + offset * 2,
                 textAlign = TextAlign.CENTER
             };
 

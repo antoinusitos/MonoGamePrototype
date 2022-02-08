@@ -37,7 +37,7 @@ namespace MonoGamePrototype.Engine
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
-            Vector2 pos = position;
+            Vector2 pos = new Vector2(positionX, positionY);
             switch(textAlign)
             {
                 case TextAlign.CENTER:

@@ -7,6 +7,9 @@ using MonoGamePrototype.Gameplay.Entities;
 using MonoGamePrototype.Gameplay.Menu;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace MonoGamePrototype.Gameplay.Levels
 {
@@ -90,7 +93,17 @@ namespace MonoGamePrototype.Gameplay.Levels
 
         private void LoadLevel()
         {
-            string[] levelTiles = LevelLoadingManager.instance.LoadLevel("Level1.txt");
+            /*tiles = new List<Tile>();
+            Tile[] loadedTiles = LevelLoadingManager.instance.LoadLevel("Level1.json");
+            for (int i = 0; i < loadedTiles.Length; i++)
+            {
+                tiles.Add(loadedTiles[i]);
+            }
+
+            return;*/
+
+            //DEBUG LOAD 
+            string[] levelTiles = LevelLoadingManager.instance.LoadLevelText("Level1.txt");
             tiles = new List<Tile>();
 
             Random random = new Random();
@@ -108,13 +121,14 @@ namespace MonoGamePrototype.Gameplay.Levels
 
                     Tile tile = new Tile("Tiles/tile_" + tileName)
                     {
-                        position = new Vector2(t * Data.TileSize, i * Data.TileSize)
+                        positionX = t * Data.TileSize,
+                        positionY = i * Data.TileSize
                     };
                     tiles.Add(tile);
                 }
             }
 
-            levelTiles = LevelLoadingManager.instance.LoadLevel("Level1_1.txt");
+            levelTiles = LevelLoadingManager.instance.LoadLevelText("Level1_1.txt");
 
             for (int i = 0; i < levelTiles.Length; i++)
             {
@@ -130,12 +144,17 @@ namespace MonoGamePrototype.Gameplay.Levels
 
                     Tile tile = new Tile("Tiles/tile_" + tileName)
                     {
-                        position = new Vector2(t * Data.TileSize, i * Data.TileSize),
+                        positionX = t * Data.TileSize,
+                        positionY = i * Data.TileSize,
                         zOrder = 1
                     };
                     tiles.Add(tile);
                 }
             }
+
+            string fileName = Data.LevelPath + "Level1.json";
+            string jsonString = JsonSerializer.Serialize(tiles);
+            File.WriteAllText(fileName, jsonString);
         }
     }
 }

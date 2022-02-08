@@ -30,20 +30,20 @@ namespace MonoGamePrototype.Gameplay.Entities
 
             if (InputManager.instance.GetKeyboardDown(Keys.D))
             {
-                position += Vector2.UnitX * gameTime.ElapsedGameTime.Milliseconds * speed;
+                positionX += gameTime.ElapsedGameTime.Milliseconds * speed;
             }
             else if (InputManager.instance.GetKeyboardDown(Keys.Q))
             {
-                position -= Vector2.UnitX * gameTime.ElapsedGameTime.Milliseconds * speed;
+                positionX -= gameTime.ElapsedGameTime.Milliseconds * speed;
             }
 
             if (InputManager.instance.GetKeyboardDown(Keys.Z))
             {
-                position -= Vector2.UnitY * gameTime.ElapsedGameTime.Milliseconds * speed;
+                positionY -= gameTime.ElapsedGameTime.Milliseconds * speed;
             }
             else if (InputManager.instance.GetKeyboardDown(Keys.S))
             {
-                position += Vector2.UnitY * gameTime.ElapsedGameTime.Milliseconds * speed;
+                positionY += gameTime.ElapsedGameTime.Milliseconds * speed;
             }
 
             Vector2 mousePos = InputManager.instance.GetMousePosition();
@@ -51,7 +51,7 @@ namespace MonoGamePrototype.Gameplay.Entities
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, position, Color.White);
+            spriteBatch.Draw(texture, new Vector2(positionX, positionY), Color.White);
         }
     }
 }

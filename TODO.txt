@@ -2,7 +2,6 @@
 Enemies
 Background
 Level Editor
-Level layers
 Load and Save Levels
 Loot
 Inventory

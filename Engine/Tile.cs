@@ -8,11 +8,17 @@ namespace MonoGamePrototype.Engine
     {
         private Texture2D texture { get; set; } = null;
 
-        private string tilePath { get; set; } = "";
+        public string tilePath { get; set; } = "";
 
-        public Tile(string path)
+        public Tile(string path = "")
         {
             tilePath = path;
+            zOrder = 0;
+        }
+
+        public Tile()
+        {
+            tilePath = "";
             zOrder = 0;
         }
 
@@ -23,7 +29,7 @@ namespace MonoGamePrototype.Engine
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, position, Color.White);
+            spriteBatch.Draw(texture, new Vector2(positionX, positionY), Color.White);
         }
     }
 }

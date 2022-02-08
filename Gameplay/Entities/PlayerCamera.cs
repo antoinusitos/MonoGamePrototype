@@ -18,10 +18,11 @@ namespace MonoGamePrototype.Gameplay.Entities
 
             if(playerTarget != null)
             {
-                position = playerTarget.position;
+                positionX = playerTarget.positionX;
+                positionY = playerTarget.positionY;
                 transform = Matrix.CreateTranslation(
-                    -playerTarget.position.X,
-                    -playerTarget.position.Y,
+                    -playerTarget.positionX,
+                    -playerTarget.positionY,
                     0) * Matrix.CreateTranslation(Data.Width / 2, Data.Height / 2, 0);
             }
         }
