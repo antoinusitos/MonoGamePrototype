@@ -18,6 +18,8 @@ namespace MonoGamePrototype.Gameplay.Levels
 
         private List<Tile> tiles { get; set; } = null;
 
+        private Tile testTile { get; set; } = null;
+
         public FirstLevel(string name) : base(name)
         {
 
@@ -26,6 +28,8 @@ namespace MonoGamePrototype.Gameplay.Levels
         public override void Initialize()
         {
             player = new Player();
+
+            testTile = new Tile("Tiles/tile_438");
 
             pauseMenuUI = new PauseMenuUI();
             pauseMenuUI.Initialize();
@@ -41,23 +45,7 @@ namespace MonoGamePrototype.Gameplay.Levels
             base.LoadContent(content);
             pauseMenuUI.LoadContent(content);
 
-            string[] levelTiles = LevelLoadingManager.instance.LoadLevel("Level1.txt");
-            tiles = new List<Tile>();
-
-            Random random = new Random();
-            for (int i = 0; i < levelTiles.Length; i++)
-            {
-                string[] tempTiles = levelTiles[i].Split(',');
-                for (int t = 0; t < tempTiles.Length; t++)
-                {
-                    int randomTile = random.Next(1, 7);
-                    Tile tile = new Tile("Tiles/tile_0" + randomTile)
-                    {
-                        position = new Vector2(t * Data.TileSize, i * Data.TileSize)
-                    };
-                    tiles.Add(tile);
-                }
-            }
+            LoadLevel();
         }
 
         public override void Start()
@@ -98,6 +86,56 @@ namespace MonoGamePrototype.Gameplay.Levels
         public override void Draw(SpriteBatch spriteBatch)
         {
             base.Draw(spriteBatch);
+        }
+
+        private void LoadLevel()
+        {
+            string[] levelTiles = LevelLoadingManager.instance.LoadLevel("Level1.txt");
+            tiles = new List<Tile>();
+
+            Random random = new Random();
+            for (int i = 0; i < levelTiles.Length; i++)
+            {
+                string[] tempTiles = levelTiles[i].Split(',');
+                for (int t = 0; t < tempTiles.Length; t++)
+                {
+                    string tileName = tempTiles[t];
+                    if (tileName == "0")
+                        continue;
+
+                    if (tileName == "1")
+                        tileName = "0" + random.Next(1, 7);
+
+                    Tile tile = new Tile("Tiles/tile_" + tileName)
+                    {
+                        position = new Vector2(t * Data.TileSize, i * Data.TileSize)
+                    };
+                    tiles.Add(tile);
+                }
+            }
+
+            levelTiles = LevelLoadingManager.instance.LoadLevel("Level1_1.txt");
+
+            for (int i = 0; i < levelTiles.Length; i++)
+            {
+                string[] tempTiles = levelTiles[i].Split(',');
+                for (int t = 0; t < tempTiles.Length; t++)
+                {
+                    string tileName = tempTiles[t];
+                    if (tileName == "0")
+                        continue;
+
+                    if (tileName == "1")
+                        tileName = "0" + random.Next(1, 7);
+
+                    Tile tile = new Tile("Tiles/tile_" + tileName)
+                    {
+                        position = new Vector2(t * Data.TileSize, i * Data.TileSize),
+                        zOrder = 1
+                    };
+                    tiles.Add(tile);
+                }
+            }
         }
     }
 }

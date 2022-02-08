@@ -17,7 +17,7 @@ namespace MonoGamePrototype.Engine
         public string[] LoadLevel(string levelName)
         {
             string path = Directory.GetCurrentDirectory() + "\\Content\\Assets\\Levels\\" + levelName;
-            string[] lines = System.IO.File.ReadAllLines(path);
+            string[] lines = File.ReadAllLines(path);
 
             return lines;
 
@@ -28,6 +28,8 @@ namespace MonoGamePrototype.Engine
                 // Use a tab to indent each line of the file.
                 Console.WriteLine(line);
             }
+
+            return lines;
         }
     }
 }

@@ -2,8 +2,8 @@
 Enemies
 Background
 Level Editor
+Level layers
 Load and Save Levels
-Test of Level
 Loot
 Inventory
 Dialog

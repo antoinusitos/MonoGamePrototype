@@ -11,7 +11,7 @@ namespace MonoGamePrototype.Gameplay.Entities
     {
         private Texture2D texture { get; set; } = null;
 
-        private float speed { get; set; } = 0.5f;
+        private float speed { get; set; } = 0.3f;
 
         public override void Initialize()
         {
