@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using MonoGamePrototype.Editor;
 using MonoGamePrototype.Engine;
 using MonoGamePrototype.Gameplay.Levels;
 using System;
@@ -12,28 +13,37 @@ namespace MonoGamePrototype.Gameplay.Menu
 
         public override void Initialize()
         {
-            entityTexts = new EntityText[3];
+            entityTexts = new EntityText[4];
 
             float offset = 150.0f;
 
+            float centerX = Data.Width / 2.0f;
+
             entityTexts[0] = new EntityText("New Game")
             {
-                positionX = Data.Width / 2.0f,
+                positionX = centerX,
                 positionY = Data.Height * 0.5f,
                 textAlign = TextAlign.CENTER
             };
 
             entityTexts[1] = new EntityText("Options")
             {
-                positionX = Data.Width / 2.0f,
+                positionX = centerX,
                 positionY = Data.Height * 0.5f + offset,
                 textAlign = TextAlign.CENTER
             };
 
             entityTexts[2] = new EntityText("Exit")
             {
-                positionX = Data.Width / 2.0f,
+                positionX = centerX,
                 positionY = Data.Height * 0.5f + offset * 2,
+                textAlign = TextAlign.CENTER
+            };
+
+            entityTexts[3] = new EntityText("Level Editor")
+            {
+                positionX = centerX,
+                positionY = Data.Height * 0.5f + offset * 3,
                 textAlign = TextAlign.CENTER
             };
 
@@ -46,9 +56,10 @@ namespace MonoGamePrototype.Gameplay.Menu
         {
             base.Start();
 
-            UIManager.instance.AddEntity(entityTexts[0]);
-            UIManager.instance.AddEntity(entityTexts[1]);
-            UIManager.instance.AddEntity(entityTexts[2]);
+            for(int i = 0; i < entityTexts.Length; i++)
+            {
+                UIManager.instance.AddEntity(entityTexts[i]);
+            }
         }
 
         public override void Update(GameTime gameTime)
@@ -78,6 +89,13 @@ namespace MonoGamePrototype.Gameplay.Menu
                 else if (menuIndex == 2)
                 {
                     MainGame.instance.Exit();
+                }
+                else if (menuIndex == 3)
+                {
+                    UIManager.instance.ClearEntities();
+                    GameManager.instance.SetGameState(GameManager.GameState.GAME);
+                    LevelEditor levelEditor = new LevelEditor();
+                    SceneManager.instance.SetLevel(levelEditor);
                 }
             }
         }

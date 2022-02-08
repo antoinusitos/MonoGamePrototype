@@ -9,7 +9,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace MonoGamePrototype.Gameplay.Levels
 {
@@ -21,8 +20,6 @@ namespace MonoGamePrototype.Gameplay.Levels
 
         private List<Tile> tiles { get; set; } = null;
 
-        private Tile testTile { get; set; } = null;
-
         public FirstLevel(string name) : base(name)
         {
 
@@ -31,8 +28,6 @@ namespace MonoGamePrototype.Gameplay.Levels
         public override void Initialize()
         {
             player = new Player();
-
-            testTile = new Tile("Tiles/tile_438");
 
             pauseMenuUI = new PauseMenuUI();
             pauseMenuUI.Initialize();
@@ -93,14 +88,14 @@ namespace MonoGamePrototype.Gameplay.Levels
 
         private void LoadLevel()
         {
-            /*tiles = new List<Tile>();
+            tiles = new List<Tile>();
             Tile[] loadedTiles = LevelLoadingManager.instance.LoadLevel("Level1.json");
             for (int i = 0; i < loadedTiles.Length; i++)
             {
                 tiles.Add(loadedTiles[i]);
             }
 
-            return;*/
+            return;
 
             //DEBUG LOAD 
             string[] levelTiles = LevelLoadingManager.instance.LoadLevelText("Level1.txt");
