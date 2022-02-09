@@ -55,5 +55,15 @@ namespace MonoGamePrototype.Editor
 
             tilePanelPageText.text = "Page : " + (tilePanel.GetPage() + 1) + " / " + tilePanel.GetMaxPage();
         }
+
+        public string GetSelectedTile()
+        {
+            return tilePanel.GetSelectedTile();
+        }
+
+        public bool GetIsOnPanel()
+        {
+            return tilePanel.IsInside();
+        }
     }
 }

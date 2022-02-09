@@ -33,12 +33,17 @@ namespace MonoGamePrototype.Engine
         {
             if(texturePath != "")
             {
-                Console.WriteLine("loading:" + Directory.GetCurrentDirectory() + "\\Content\\" + Data.DataPath + texturePath);
                 if(File.Exists(Directory.GetCurrentDirectory() + "\\Content\\" + Data.DataPath + texturePath + ".xnb"))
                 {
                     texture = content.Load<Texture2D>(Data.DataPath + texturePath);
                 }
             }
+        }
+
+        public void UpdateTexture(string newTexture, ContentManager content)
+        {
+            texturePath = newTexture;
+            LoadContent(content);
         }
 
         public override void Draw(SpriteBatch spriteBatch)

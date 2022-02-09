@@ -140,7 +140,6 @@ namespace MonoGamePrototype.Editor
             if (index == -1)
                 return;
 
-            Console.WriteLine("tileIndex:" + tileCurrentIndex);
             tiles[tileCurrentIndex].color = Color.Red;
         }
 
@@ -193,6 +192,14 @@ namespace MonoGamePrototype.Editor
         public int GetMaxPage()
         {
             return pageMax;
+        }
+
+        public string GetSelectedTile()
+        {
+            if (tileCurrentIndex == -1)
+                return "";
+
+            return tiles[tileCurrentIndex].texturePath;
         }
     }
 }

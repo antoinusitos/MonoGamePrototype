@@ -538,6 +538,18 @@
 /processorParam:TextureFormat=Color
 /build:Assets/PNG/Survivor 1/survivor1_stand.png
 
+#begin Assets/PNG/Tiles/Grid.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Assets/PNG/Tiles/Grid.png
+
 #begin Assets/PNG/Tiles/tile_01.png
 /importer:TextureImporter
 /processor:TextureProcessor
