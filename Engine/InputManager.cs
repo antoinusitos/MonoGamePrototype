@@ -10,6 +10,9 @@ namespace MonoGamePrototype.Engine
         private KeyboardState previousState { get; set; }
         private KeyboardState currentState { get; set; }
 
+        private MouseState previousMouseState { get; set; }
+        private MouseState currentMouseState { get; set; }
+
         public override void Initialize()
         {
             instance = this;
@@ -19,6 +22,9 @@ namespace MonoGamePrototype.Engine
         {
             previousState = currentState;
             currentState = Keyboard.GetState();
+
+            previousMouseState = currentMouseState;
+            currentMouseState = Mouse.GetState();
         }
 
         public bool GetKeyboardDown(Keys key)
@@ -49,6 +55,22 @@ namespace MonoGamePrototype.Engine
         public Vector2 GetMousePosition()
         {
             return Mouse.GetState().Position.ToVector2();
+        }
+
+        public bool GetMouseButtonDown(int index)
+        {
+            if(index == 0)
+                return currentMouseState.LeftButton == ButtonState.Pressed;
+            else
+                return currentMouseState.RightButton == ButtonState.Pressed;
+        }
+
+        public bool GetMouseButtonPressed(int index)
+        {
+            if (index == 0)
+                return currentMouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released;
+            else
+                return currentMouseState.RightButton == ButtonState.Pressed && previousMouseState.RightButton == ButtonState.Released;
         }
     }
 }

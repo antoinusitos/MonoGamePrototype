@@ -54,6 +54,7 @@ namespace MonoGamePrototype.Engine
         {
             entity.Initialize();
             entity.LoadContent(contentManager);
+            entity.Start();
             entities.Add(entity);
         }
 

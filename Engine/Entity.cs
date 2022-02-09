@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using System;
+using System.IO;
 
 namespace MonoGamePrototype.Engine
 {
@@ -18,6 +20,8 @@ namespace MonoGamePrototype.Engine
 
         protected Texture2D texture { get; set; } = null;
 
+        public Color color { get; set; } = Color.White;
+
         public string texturePath { get; set; } = "";
 
         public Entity()
@@ -27,16 +31,26 @@ namespace MonoGamePrototype.Engine
 
         public override void LoadContent(ContentManager content)
         {
-            texture = content.Load<Texture2D>(Data.DataPath + texturePath);
+            if(texturePath != "")
+            {
+                Console.WriteLine("loading:" + Directory.GetCurrentDirectory() + "\\Content\\" + Data.DataPath + texturePath);
+                if(File.Exists(Directory.GetCurrentDirectory() + "\\Content\\" + Data.DataPath + texturePath + ".xnb"))
+                {
+                    texture = content.Load<Texture2D>(Data.DataPath + texturePath);
+                }
+            }
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
+            if (texture == null)
+                return;
+
             spriteBatch.Draw(
                 texture,
                 new Vector2(positionX, positionY),
                 null,
-                Color.White,
+                color,
                 rotation,
                 new Vector2(originX, originY),
                 new Vector2(scaleX, scaleY),

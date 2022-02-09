@@ -1,11 +1,11 @@
-﻿using Microsoft.Xna.Framework.Content;
-using MonoGamePrototype.Engine;
+﻿using MonoGamePrototype.Engine;
+using Microsoft.Xna.Framework;
 
 namespace MonoGamePrototype.Editor
 {
     public class LevelEditor : Level
     {
-        EntityText levelNameText { get; set; } = null;
+        private LevelEditorMenuUI levelEditorMenuUI { get; set; } = null;
 
         public LevelEditor(string name = "Level Editor") : base(name)
         {
@@ -16,24 +16,22 @@ namespace MonoGamePrototype.Editor
         {
             base.Initialize();
 
-            levelNameText = new EntityText("Level Name : NOT SAVED")
-            {
-                positionX = Data.Width / 2.0f,
-                positionY = 0,
-                textAlign = TextAlign.CENTER
-            };
-        }
-
-        public override void LoadContent(ContentManager content)
-        {
-            base.LoadContent(content);
+            levelEditorMenuUI = new LevelEditorMenuUI();
+            levelEditorMenuUI.Initialize();
         }
 
         public override void Start()
         {
             base.Start();
 
-            UIManager.instance.AddEntity(levelNameText);
+            levelEditorMenuUI.Start();
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+
+            levelEditorMenuUI.Update(gameTime);
         }
     }
 }
