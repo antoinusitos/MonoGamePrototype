@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using MonoGamePrototype.Engine;
-using System;
 
 namespace MonoGamePrototype.Gameplay.Entities
 {
@@ -9,9 +8,11 @@ namespace MonoGamePrototype.Gameplay.Entities
     {
         private float speed { get; set; } = 0.3f;
 
-        public Player(string path)
+        public Player(string path) : base()
         {
             texturePath = path;
+            originX = 15;
+            originY = 21;
         }
 
         public override void Initialize()
@@ -42,7 +43,31 @@ namespace MonoGamePrototype.Gameplay.Entities
                 positionY += gameTime.ElapsedGameTime.Milliseconds * speed;
             }
 
+            LookAtCursor();
+        }
+
+        private void LookAtCursor()
+        {
             Vector2 mousePos = InputManager.instance.GetMousePosition();
+            mousePos = Data.ScreenToWorldSpace(mousePos);
+            Vector2 pos = new Vector2(positionX, positionY);
+            Vector2 dir = mousePos - pos;
+            dir.Normalize();
+            float dot = Vector2.Dot(Vector2.UnitX, dir);
+
+            float toAdd = 0;
+            if (mousePos.Y < positionY)
+            {
+                dot += 1;
+                toAdd += 180;
+            }
+            else
+            {
+                dot *= -1;
+                dot += 1;
+            }
+
+            rotation = MathHelper.ToRadians((dot * 90) + toAdd);
         }
     }
 }

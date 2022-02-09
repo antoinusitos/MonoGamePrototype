@@ -13,10 +13,17 @@ namespace MonoGamePrototype.Engine
         public float scaleX { get; set; } = 1;
         public float scaleY { get; set; } = 1;
         public float zOrder { get; set; } = 0;
+        public float originX { get; set; } = 0;
+        public float originY { get; set; } = 0;
 
         protected Texture2D texture { get; set; } = null;
 
         public string texturePath { get; set; } = "";
+
+        public Entity()
+        {
+            originX = originY = Data.TileSize / 2.0f;
+        }
 
         public override void LoadContent(ContentManager content)
         {
@@ -31,7 +38,7 @@ namespace MonoGamePrototype.Engine
                 null,
                 Color.White,
                 rotation,
-                new Vector2(Data.TileSize / 2, Data.TileSize / 2),
+                new Vector2(originX, originY),
                 new Vector2(scaleX, scaleY),
                 SpriteEffects.None,
                 zOrder / 100.0f);

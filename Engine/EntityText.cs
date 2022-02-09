@@ -23,7 +23,7 @@ namespace MonoGamePrototype.Engine
 
         public bool isLoaded { get; private set; } = false;
 
-        public EntityText(string aText)
+        public EntityText(string aText) : base()
         {
             text = aText;
             zOrder = Data.UIZOrderStart;

@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using Microsoft.Xna.Framework;
+using System.IO;
 
 namespace MonoGamePrototype.Engine
 {
@@ -12,5 +13,16 @@ namespace MonoGamePrototype.Engine
         public static int TileSize = 64;
         public static float ZOrderMax = 100;
         public static float UIZOrderStart = (ZOrderMax / 2) + 1;
+
+        public static Vector2 ScreenToWorldSpace(in Vector2 point)
+        {
+            if(CameraManager.instance.currentCamera == null)
+            {
+                return Vector2.Zero;
+            }
+
+            Matrix invertedMatrix = Matrix.Invert(CameraManager.instance.currentCamera.transform);
+            return Vector2.Transform(point, invertedMatrix);
+        }
     }
 }

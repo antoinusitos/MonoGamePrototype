@@ -1,17 +1,14 @@
-﻿using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
-
-namespace MonoGamePrototype.Engine
+﻿namespace MonoGamePrototype.Engine
 {
     public class Tile : Entity
     {
-        public Tile(string path = "")
+        public Tile(string path = "") : base()
         {
             texturePath = path;
             zOrder = 0;
         }
 
-        public Tile()
+        public Tile() : base()
         {
             texturePath = "";
             zOrder = 0;
