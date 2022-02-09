@@ -3,7 +3,6 @@ using Microsoft.Xna.Framework.Input;
 using MonoGamePrototype.Editor;
 using MonoGamePrototype.Engine;
 using MonoGamePrototype.Gameplay.Levels;
-using System;
 
 namespace MonoGamePrototype.Gameplay.Menu
 {
@@ -93,7 +92,7 @@ namespace MonoGamePrototype.Gameplay.Menu
                 else if (menuIndex == 3)
                 {
                     UIManager.instance.ClearEntities();
-                    GameManager.instance.SetGameState(GameManager.GameState.GAME);
+                    GameManager.instance.SetGameState(GameManager.GameState.LEVELEDITOR);
                     LevelEditor levelEditor = new LevelEditor();
                     SceneManager.instance.SetLevel(levelEditor);
                 }

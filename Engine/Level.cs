@@ -8,7 +8,7 @@ namespace MonoGamePrototype.Engine
 {
     public class Level : BaseBehaviour
     {
-        public Dictionary<int, List<Entity>> entities { get; set; } = null;
+        private List<Entity> entities { get; set; } = null;
 
         private ContentManager contentManager { get; set; } = null;
 
@@ -21,13 +21,7 @@ namespace MonoGamePrototype.Engine
         public Level(string name)
         {
             levelName = name;
-            entities = new Dictionary<int, List<Entity>>
-            {
-                { 0, new List<Entity>() },
-                { 1, new List<Entity>() },
-                { 2, new List<Entity>() },
-                { 3, new List<Entity>() }
-            };
+            entities = new List<Entity>();
         }
 
         public override void Initialize()
@@ -35,12 +29,10 @@ namespace MonoGamePrototype.Engine
             startTime = new System.Diagnostics.Stopwatch();
             startTime.Start();
 
-            foreach (KeyValuePair<int, List<Entity>> pair in entities)
+
+            for (int i = 0; i < entities.Count; i++)
             {
-                for (int i = 0; i < pair.Value.Count; i++)
-                {
-                    pair.Value[i].Initialize();
-                }
+                entities[i].Initialize();
             }
         }
 
@@ -48,12 +40,9 @@ namespace MonoGamePrototype.Engine
         {
             contentManager = content;
 
-            foreach (KeyValuePair<int, List<Entity>> pair in entities)
+            for (int i = 0; i < entities.Count; i++)
             {
-                for (int i = 0; i < pair.Value.Count; i++)
-                {
-                    pair.Value[i].LoadContent(content);
-                }
+                entities[i].LoadContent(content);
             }
         }
 
@@ -61,12 +50,9 @@ namespace MonoGamePrototype.Engine
         {
             base.Start();
 
-            foreach (KeyValuePair<int, List<Entity>> pair in entities)
+            for (int i = 0; i < entities.Count; i++)
             {
-                for (int i = 0; i < pair.Value.Count; i++)
-                {
-                    pair.Value[i].Start();
-                }
+                entities[i].Start();
             }
         }
 
@@ -79,23 +65,23 @@ namespace MonoGamePrototype.Engine
                 firstFrame = false;
             }
 
-            foreach (KeyValuePair<int, List<Entity>> pair in entities)
+            for (int i = 0; i < entities.Count; i++)
             {
-                for (int i = 0; i < pair.Value.Count; i++)
-                {
-                    pair.Value[i].Update(gameTime);
-                }
+                if (!entities[i].isActive)
+                    continue;
+
+                entities[i].Update(gameTime);
             }
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            foreach(KeyValuePair<int, List<Entity>> pair in entities)
+            for(int i = 0; i < entities.Count; i++)
             {
-                for (int i = 0; i < pair.Value.Count; i++)
-                {
-                    pair.Value[i].Draw(spriteBatch);
-                }
+                if (!entities[i].isActive)
+                    continue;
+
+                entities[i].Draw(spriteBatch);
             }
         }
 
@@ -103,15 +89,12 @@ namespace MonoGamePrototype.Engine
         {
             entity.Initialize();
             entity.LoadContent(contentManager);
-            entities[entity.zOrder].Add(entity);
+            entities.Add(entity);
         }
 
         public void ClearEntities()
         {
-            foreach (KeyValuePair<int, List<Entity>> pair in entities)
-            {
-                pair.Value.Clear();
-            }
+            entities.Clear();
         }
     }
 }

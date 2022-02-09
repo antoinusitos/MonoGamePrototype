@@ -15,12 +15,13 @@ namespace MonoGamePrototype.Engine
             instance = this;
         }
 
-        public string[] LoadLevelText(string levelName)
+        public string[] LoadLevelText(string levelName, bool debug = false)
         {
             string path = Data.LevelPath + levelName;
             string[] lines = File.ReadAllLines(path);
 
-            return lines;
+            if(!debug)
+                return lines;
 
             // Display the file contents by using a foreach loop.
             System.Console.WriteLine("Contents of level = \n");

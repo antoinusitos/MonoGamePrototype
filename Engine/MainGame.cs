@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using MonoGamePrototype.Gameplay.Levels;
 using System;
 
@@ -129,16 +128,20 @@ namespace MonoGamePrototype.Engine
 
             if (CameraManager.instance.currentCamera != null)
             {
-                spriteBatch.Begin(transformMatrix: CameraManager.instance.currentCamera.transform);
+                spriteBatch.Begin(transformMatrix: CameraManager.instance.currentCamera.transform, sortMode: SpriteSortMode.FrontToBack);
                 sceneManager.Draw(spriteBatch);
-                spriteBatch.End();
             }
             else
             {
+                spriteBatch.Begin();
                 sceneManager.Draw(spriteBatch);
             }
 
+            spriteBatch.End();
+
+            spriteBatch.Begin(sortMode: SpriteSortMode.FrontToBack);
             uiManager.Draw(spriteBatch);
+            spriteBatch.End();
             // TODO: Add your drawing code here
 
             base.Draw(gameTime);

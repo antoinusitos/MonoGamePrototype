@@ -12,6 +12,29 @@ namespace MonoGamePrototype.Engine
         public float rotation { get; set; } = 0;
         public float scaleX { get; set; } = 1;
         public float scaleY { get; set; } = 1;
-        public int zOrder { get; set; } = 0;
+        public float zOrder { get; set; } = 0;
+
+        protected Texture2D texture { get; set; } = null;
+
+        public string texturePath { get; set; } = "";
+
+        public override void LoadContent(ContentManager content)
+        {
+            texture = content.Load<Texture2D>(Data.DataPath + texturePath);
+        }
+
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(
+                texture,
+                new Vector2(positionX, positionY),
+                null,
+                Color.White,
+                rotation,
+                new Vector2(Data.TileSize / 2, Data.TileSize / 2),
+                new Vector2(scaleX, scaleY),
+                SpriteEffects.None,
+                zOrder / 100.0f);
+        }
     }
 }

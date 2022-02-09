@@ -27,7 +27,7 @@ namespace MonoGamePrototype.Gameplay.Levels
 
         public override void Initialize()
         {
-            player = new Player();
+            player = new Player("Hitman 1/hitman1_gun");
 
             pauseMenuUI = new PauseMenuUI();
             pauseMenuUI.Initialize();
@@ -43,7 +43,7 @@ namespace MonoGamePrototype.Gameplay.Levels
             base.LoadContent(content);
             pauseMenuUI.LoadContent(content);
 
-            LoadLevel();
+            LoadLevel(false);
         }
 
         public override void Start()
@@ -58,6 +58,7 @@ namespace MonoGamePrototype.Gameplay.Levels
             {
                 AddEntity(tiles[i]);
             }
+
         }
 
         public override void Update(GameTime gameTime)
@@ -86,16 +87,19 @@ namespace MonoGamePrototype.Gameplay.Levels
             base.Draw(spriteBatch);
         }
 
-        private void LoadLevel()
+        private void LoadLevel(bool debug = false)
         {
-            tiles = new List<Tile>();
-            Tile[] loadedTiles = LevelLoadingManager.instance.LoadLevel("Level1.json");
-            for (int i = 0; i < loadedTiles.Length; i++)
+            if (!debug)
             {
-                tiles.Add(loadedTiles[i]);
-            }
+                tiles = new List<Tile>();
+                Tile[] loadedTiles = LevelLoadingManager.instance.LoadLevel("Level1.json");
+                for (int i = 0; i < loadedTiles.Length; i++)
+                {
+                    tiles.Add(loadedTiles[i]);
+                }
 
-            return;
+                return;
+            }
 
             //DEBUG LOAD 
             string[] levelTiles = LevelLoadingManager.instance.LoadLevelText("Level1.txt");
@@ -141,7 +145,7 @@ namespace MonoGamePrototype.Gameplay.Levels
                     {
                         positionX = t * Data.TileSize,
                         positionY = i * Data.TileSize,
-                        zOrder = 1
+                        zOrder = 50
                     };
                     tiles.Add(tile);
                 }

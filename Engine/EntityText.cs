@@ -26,6 +26,7 @@ namespace MonoGamePrototype.Engine
         public EntityText(string aText)
         {
             text = aText;
+            zOrder = Data.UIZOrderStart;
         }
 
         public override void LoadContent(ContentManager content)
@@ -36,7 +37,6 @@ namespace MonoGamePrototype.Engine
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Begin();
             Vector2 pos = new Vector2(positionX, positionY);
             switch(textAlign)
             {
@@ -51,7 +51,6 @@ namespace MonoGamePrototype.Engine
                     break;
             }
             spriteBatch.DrawString(font, text, pos, color);
-            spriteBatch.End();
         }
     }
 }

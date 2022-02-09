@@ -9,6 +9,7 @@
             MENU,
             GAME,
             PAUSE,
+            LEVELEDITOR,
         }
 
         public GameState currentGameState { get; private set; } = GameState.MENU;

@@ -1,6 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGamePrototype.Engine;
 using System;
@@ -9,18 +7,16 @@ namespace MonoGamePrototype.Gameplay.Entities
 {
     public class Player : Entity
     {
-        private Texture2D texture { get; set; } = null;
-
         private float speed { get; set; } = 0.3f;
+
+        public Player(string path)
+        {
+            texturePath = path;
+        }
 
         public override void Initialize()
         {
-            zOrder = 1;
-        }
-
-        public override void LoadContent(ContentManager content)
-        {
-            texture = content.Load<Texture2D>(Data.DataPath + "Hitman 1/hitman1_gun");
+            zOrder = 49;
         }
 
         public override void Update(GameTime gameTime)
@@ -47,11 +43,6 @@ namespace MonoGamePrototype.Gameplay.Entities
             }
 
             Vector2 mousePos = InputManager.instance.GetMousePosition();
-        }
-
-        public override void Draw(SpriteBatch spriteBatch)
-        {
-            spriteBatch.Draw(texture, new Vector2(positionX, positionY), Color.White);
         }
     }
 }

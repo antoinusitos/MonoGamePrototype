@@ -1,4 +1,5 @@
 ﻿Shoot
+Camera
 Enemies
 Background
 Level Editor
@@ -10,4 +11,4 @@ Quest
 Narration
 House (with upper floor)
 AI
-Put the levels in the bin folder
+Put the json levels in the bin folder

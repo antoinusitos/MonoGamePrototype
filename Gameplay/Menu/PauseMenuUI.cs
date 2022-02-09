@@ -17,21 +17,24 @@ namespace MonoGamePrototype.Gameplay.Menu
             {
                 positionX = Data.Width / 2.0f,
                 positionY = Data.Height * 0.5f,
-                textAlign = TextAlign.CENTER
+                textAlign = TextAlign.CENTER,
+                isActive = false
             };
 
             entityTexts[1] = new EntityText("Options")
             {
                 positionX = Data.Width / 2.0f,
                 positionY = Data.Height * 0.5f + offset,
-                textAlign = TextAlign.CENTER
+                textAlign = TextAlign.CENTER,
+                isActive = false
             };
 
             entityTexts[2] = new EntityText("Main Menu")
             {
                 positionX = Data.Width / 2.0f,
                 positionY = Data.Height * 0.5f + offset * 2,
-                textAlign = TextAlign.CENTER
+                textAlign = TextAlign.CENTER,
+                isActive = false
             };
 
             entityTexts[menuIndex].color = Color.Red;
@@ -43,9 +46,10 @@ namespace MonoGamePrototype.Gameplay.Menu
         {
             base.Start();
 
-            UIManager.instance.AddEntity(entityTexts[0]);
-            UIManager.instance.AddEntity(entityTexts[1]);
-            UIManager.instance.AddEntity(entityTexts[2]);
+            for (int i = 0; i < entityTexts.Length; i++)
+            {
+                UIManager.instance.AddEntity(entityTexts[i]);
+            }
         }
 
         public override void Update(GameTime gameTime)
