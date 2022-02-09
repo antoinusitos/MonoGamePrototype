@@ -12,7 +12,7 @@ namespace MonoGamePrototype.Editor
     {
         private int tileShownIndex { get; set; } = 0;
 
-        private int tileCurrentIndex { get; set; } = 0;
+        private int tileCurrentIndex { get; set; } = -1;
 
         private int tileNumberColumn { get; set; } = 4;
         private int tileNumberRow { get; set; } = 6;
@@ -64,6 +64,7 @@ namespace MonoGamePrototype.Editor
                 tiles[i].positionX = positionX + (Data.TileSize / 2) + posX * Data.TileSize;
                 tiles[i].positionY = positionY + (Data.TileSize / 2) + posY * Data.TileSize;
                 tiles[i].zOrder = 1;
+                tiles[i].isActive = false;
                 posX++;
                 if(posX >= tileNumberColumn)
                 {
@@ -76,6 +77,15 @@ namespace MonoGamePrototype.Editor
                     }
                 }
             }
+
+            int end = tileShownIndex + (tileNumberColumn * tileNumberRow);
+
+            for (int i = tileShownIndex; i < end; i++)
+            {
+                tiles[i].isActive = true;
+            }
+
+            SelectTile(0);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -104,8 +114,7 @@ namespace MonoGamePrototype.Editor
                     int x = (int)(pos.X / Data.TileSize);
                     int y = (int)(pos.Y / Data.TileSize);
 
-                    tileCurrentIndex = y * tileNumberColumn + x;
-                    Console.WriteLine("tileIndex:" + tileCurrentIndex);
+                    SelectTile((y * tileNumberColumn + x) + (page * tileNumberColumn * tileNumberRow));
                 }
             }
 
@@ -117,6 +126,22 @@ namespace MonoGamePrototype.Editor
             {
                 ChangePage(-1);
             }
+        }
+
+        private void SelectTile(int index)
+        {
+            if (tileCurrentIndex != -1)
+            {
+                tiles[tileCurrentIndex].color = Color.White;
+            }
+
+            tileCurrentIndex = index;
+
+            if (index == -1)
+                return;
+
+            Console.WriteLine("tileIndex:" + tileCurrentIndex);
+            tiles[tileCurrentIndex].color = Color.Red;
         }
 
         private void ChangePage(int increment)
@@ -131,23 +156,43 @@ namespace MonoGamePrototype.Editor
             }
             else
             {
-                if (page == pageMax)
+                if (page + 1 == pageMax)
                     return;
                 page++;
                 newShownIndex += tileNumberColumn * tileNumberRow;
             }
 
-            for (int i = tileShownIndex; i < tileShownIndex + (tileNumberColumn * tileNumberRow); i++)
+            SelectTile(-1);
+
+            tileCurrentIndex = 0;
+
+            int end = tileShownIndex + (tileNumberColumn * tileNumberRow);
+
+            for (int i = tileShownIndex; i < end; i++)
             {
                 tiles[i].isActive = false;
             }
 
             tileShownIndex = newShownIndex;
 
-            for (int i = newShownIndex; i < newShownIndex + (tileNumberColumn * tileNumberRow); i++)
+            end = newShownIndex + (tileNumberColumn * tileNumberRow);
+
+            for (int i = newShownIndex; i < end; i++)
             {
                 tiles[i].isActive = true;
             }
+
+            SelectTile(page * tileNumberColumn * tileNumberRow);
+        }
+
+        public int GetPage()
+        {
+            return page;
+        }
+
+        public int GetMaxPage()
+        {
+            return pageMax;
         }
     }
 }

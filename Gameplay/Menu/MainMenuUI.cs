@@ -22,28 +22,32 @@ namespace MonoGamePrototype.Gameplay.Menu
             {
                 positionX = centerX,
                 positionY = Data.Height * 0.5f,
-                textAlign = TextAlign.CENTER
+                textAlign = TextAlign.CENTER,
+                textType = TextType.TITLE
             };
 
             entityTexts[1] = new EntityText("Options")
             {
                 positionX = centerX,
                 positionY = Data.Height * 0.5f + offset,
-                textAlign = TextAlign.CENTER
+                textAlign = TextAlign.CENTER,
+                textType = TextType.TITLE
             };
 
             entityTexts[2] = new EntityText("Exit")
             {
                 positionX = centerX,
                 positionY = Data.Height * 0.5f + offset * 2,
-                textAlign = TextAlign.CENTER
+                textAlign = TextAlign.CENTER,
+                textType = TextType.TITLE
             };
 
             entityTexts[3] = new EntityText("Level Editor")
             {
                 positionX = centerX,
                 positionY = Data.Height * 0.5f + offset * 3,
-                textAlign = TextAlign.CENTER
+                textAlign = TextAlign.CENTER,
+                textType = TextType.TITLE
             };
 
             entityTexts[menuIndex].color = Color.Red;

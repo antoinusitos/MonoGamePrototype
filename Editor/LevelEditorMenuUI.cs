@@ -11,6 +11,8 @@ namespace MonoGamePrototype.Editor
 
         private TileSelectionPanel tilePanel { get; set; } = null;
 
+        private EntityText tilePanelPageText { get; set; } = null;
+
         public override void Initialize()
         {
             base.Initialize();
@@ -19,7 +21,8 @@ namespace MonoGamePrototype.Editor
             {
                 positionX = Data.Width / 2.0f,
                 positionY = 0,
-                textAlign = TextAlign.CENTER
+                textAlign = TextAlign.CENTER,
+                textType = TextType.BOLD
             };
 
             tilePanel = new TileSelectionPanel()
@@ -27,6 +30,13 @@ namespace MonoGamePrototype.Editor
                 positionX = 50,
                 positionY = 50,
                 color = Color.Black
+            };
+
+            tilePanelPageText = new EntityText("Page : 0 / 0")
+            {
+                positionX = 50,
+                positionY = tilePanel.size.Y + 50,
+                textAlign = TextAlign.LEFT
             };
         }
 
@@ -36,11 +46,14 @@ namespace MonoGamePrototype.Editor
 
             UIManager.instance.AddEntity(levelNameText);
             UIManager.instance.AddEntity(tilePanel);
+            UIManager.instance.AddEntity(tilePanelPageText);
         }
 
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+
+            tilePanelPageText.text = "Page : " + (tilePanel.GetPage() + 1) + " / " + tilePanel.GetMaxPage();
         }
     }
 }

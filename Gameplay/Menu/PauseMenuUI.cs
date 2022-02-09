@@ -18,7 +18,8 @@ namespace MonoGamePrototype.Gameplay.Menu
                 positionX = Data.Width / 2.0f,
                 positionY = Data.Height * 0.5f,
                 textAlign = TextAlign.CENTER,
-                isActive = false
+                isActive = false,
+                textType = TextType.TITLE
             };
 
             entityTexts[1] = new EntityText("Options")
@@ -26,7 +27,8 @@ namespace MonoGamePrototype.Gameplay.Menu
                 positionX = Data.Width / 2.0f,
                 positionY = Data.Height * 0.5f + offset,
                 textAlign = TextAlign.CENTER,
-                isActive = false
+                isActive = false,
+                textType = TextType.TITLE
             };
 
             entityTexts[2] = new EntityText("Main Menu")
@@ -34,7 +36,8 @@ namespace MonoGamePrototype.Gameplay.Menu
                 positionX = Data.Width / 2.0f,
                 positionY = Data.Height * 0.5f + offset * 2,
                 textAlign = TextAlign.CENTER,
-                isActive = false
+                isActive = false,
+                textType = TextType.TITLE
             };
 
             entityTexts[menuIndex].color = Color.Red;

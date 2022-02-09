@@ -17,21 +17,24 @@ namespace MonoGamePrototype.Gameplay.Menu
             {
                 positionX = Data.Width / 2.0f,
                 positionY = Data.Height * 0.5f,
-                textAlign = TextAlign.CENTER
+                textAlign = TextAlign.CENTER,
+                textType = TextType.TITLE
             };
 
             entityTexts[1] = new EntityText("Option 2")
             {
                 positionX = Data.Width / 2.0f,
                 positionY = Data.Height * 0.5f + offset,
-                textAlign = TextAlign.CENTER
+                textAlign = TextAlign.CENTER,
+                textType = TextType.TITLE
             };
 
             entityTexts[2] = new EntityText("Back")
             {
                 positionX = Data.Width / 2.0f,
                 positionY = Data.Height * 0.5f + offset * 2,
-                textAlign = TextAlign.CENTER
+                textAlign = TextAlign.CENTER,
+                textType = TextType.TITLE
             };
 
             entityTexts[menuIndex].color = Color.Red;

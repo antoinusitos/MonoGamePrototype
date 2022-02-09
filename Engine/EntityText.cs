@@ -11,6 +11,14 @@ namespace MonoGamePrototype.Engine
         RIGHT
     }
 
+    public enum TextType
+    {
+        NORMAL,
+        TITLE,
+        BOLD
+    }
+
+
     public class EntityText : Entity
     {
         public string text { get; set; } = "";
@@ -19,7 +27,7 @@ namespace MonoGamePrototype.Engine
 
         private SpriteFont font { get; set; } = null;
 
-        public Color color { get; set; } = Color.White;
+        public TextType textType { get; set; } = TextType.NORMAL;
 
         public bool isLoaded { get; private set; } = false;
 
@@ -32,7 +40,20 @@ namespace MonoGamePrototype.Engine
         public override void LoadContent(ContentManager content)
         {
             isLoaded = true;
-            font = content.Load<SpriteFont>(Data.DataPath + "Font/Roboto-Bold-Title");
+            switch(textType)
+            {
+                case TextType.TITLE:
+                    font = content.Load<SpriteFont>(Data.DataPath + "Font/Roboto-Bold-Title");
+                    break;
+
+                case TextType.BOLD:
+                    font = content.Load<SpriteFont>(Data.DataPath + "Font/Roboto-Bold");
+                    break;
+
+                case TextType.NORMAL:
+                    font = content.Load<SpriteFont>(Data.DataPath + "Font/Roboto-Regular");
+                    break;
+            }
         }
 
         public override void Draw(SpriteBatch spriteBatch)
