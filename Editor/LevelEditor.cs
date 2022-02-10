@@ -14,14 +14,19 @@ namespace MonoGamePrototype.Editor
 
         private List<Tile> generatedTiles { get; set; } = null;
 
+        private List<Tile> AddedTiles { get; set; } = null;
+
         private int levelSizeX { get; set; } = 20;
         private int levelSizeY { get; set; } = 20;
 
         private ContentManager contentManager { get; set; } = null;
 
+        private int currentLayer = 0;
+
         public LevelEditor(string name = "Level Editor") : base(name)
         {
             generatedTiles = new List<Tile>();
+            AddedTiles = new List<Tile>();
         }
 
         public override void Initialize()
@@ -33,8 +38,10 @@ namespace MonoGamePrototype.Editor
 
             for (int i = 0; i < levelSizeX * levelSizeY; i++)
             {
-                generatedTiles.Add(new Tile("Tiles/Grid"));
-
+                generatedTiles.Add(new Tile("Tiles/Grid")
+                {
+                    zOrder = currentLayer
+                }) ;
             }
         }
 
@@ -80,8 +87,22 @@ namespace MonoGamePrototype.Editor
                 int x = (int)(pos.X / Data.TileSize);
                 int y = (int)(pos.Y / Data.TileSize);
 
-                int tileCurrentIndex = (y * levelSizeX + x);
-                generatedTiles[tileCurrentIndex].UpdateTexture(levelEditorMenuUI.GetSelectedTile(), contentManager);
+                if (currentLayer == 0)
+                {
+                    int tileCurrentIndex = (y * levelSizeX + x);
+                    generatedTiles[tileCurrentIndex].UpdateTexture(levelEditorMenuUI.GetSelectedTile(), contentManager);
+                }
+                else
+                {
+                    Tile tile = new Tile(levelEditorMenuUI.GetSelectedTile())
+                    {
+                        zOrder = currentLayer,
+                        positionX = (Data.TileSize / 2) + x * Data.TileSize,
+                        positionY = (Data.TileSize / 2) + y * Data.TileSize
+                    };
+                    AddedTiles.Add(tile);
+                    AddEntity(tile);
+                }
             }
 
             if(InputManager.instance.GetKeyboardDown(Keys.LeftControl) && InputManager.instance.GetKeyboardPressed(Keys.S))
@@ -90,11 +111,39 @@ namespace MonoGamePrototype.Editor
                 LevelLoadingManager.instance.SaveLevel("testMap", generatedTiles);
                 levelEditorMenuUI.UpdateMapName("testMap");
             }
+
+            if(InputManager.instance.GetKeyboardPressed(Keys.P))
+            {
+                currentLayer++;
+                levelEditorMenuUI.UpdateLayerText(currentLayer);
+                ShowCurrentLayerTiles();
+            }
+            else if (InputManager.instance.GetKeyboardPressed(Keys.O))
+            {
+                currentLayer--;
+                levelEditorMenuUI.UpdateLayerText(currentLayer);
+                ShowCurrentLayerTiles();
+            }
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
             base.Draw(spriteBatch);
+        }
+
+        private void ShowCurrentLayerTiles()
+        {
+            for(int i = 0; i < entities.Count; i++)
+            {
+                if(entities[i].zOrder == currentLayer)
+                {
+                    entities[i].color = Color.White;
+                }
+                else
+                {
+                    entities[i].color = new Color(100, 100, 100, 0.5f);
+                }
+            }
         }
     }
 }

@@ -11,6 +11,8 @@ namespace MonoGamePrototype.Editor
 
         private EntityText tilePanelPageText { get; set; } = null;
 
+        private EntityText layerText { get; set; } = null;
+
         public override void Initialize()
         {
             base.Initialize();
@@ -36,6 +38,13 @@ namespace MonoGamePrototype.Editor
                 positionY = tilePanel.size.Y + 50,
                 textAlign = TextAlign.LEFT
             };
+
+            layerText = new EntityText("Layer : 0")
+            {
+                positionX = 50,
+                positionY = tilePanel.size.Y + 100,
+                textAlign = TextAlign.LEFT
+            };
         }
 
         public override void Start()
@@ -45,6 +54,7 @@ namespace MonoGamePrototype.Editor
             UIManager.instance.AddEntity(levelNameText);
             UIManager.instance.AddEntity(tilePanel);
             UIManager.instance.AddEntity(tilePanelPageText);
+            UIManager.instance.AddEntity(layerText);
         }
 
         public override void Update(GameTime gameTime)
@@ -67,6 +77,11 @@ namespace MonoGamePrototype.Editor
         public void UpdateMapName(string aName)
         {
             levelNameText.text = "Level Name : " + aName;
+        }
+
+        public void UpdateLayerText(int layer)
+        {
+            layerText.text = "Layer : " + layer;
         }
     }
 }

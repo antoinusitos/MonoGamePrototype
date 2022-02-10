@@ -8,7 +8,7 @@ namespace MonoGamePrototype.Engine
 {
     public class Level : BaseBehaviour
     {
-        private List<Entity> entities { get; set; } = null;
+        protected List<Entity> entities { get; set; } = null;
 
         private ContentManager contentManager { get; set; } = null;
 
