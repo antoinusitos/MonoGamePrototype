@@ -16,6 +16,9 @@ namespace MonoGamePrototype.Engine
 
         public override void Update(GameTime gameTime)
         {
+            if (entityTexts == null || entityTexts.Length <= 0)
+                return;
+
             bool needUpdate = false;
             int increment = 0;
             if (InputManager.instance.GetKeyboardPressed(Keys.Z) && menuIndex > 0)

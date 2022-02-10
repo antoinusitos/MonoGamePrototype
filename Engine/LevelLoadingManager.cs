@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 
@@ -39,6 +40,13 @@ namespace MonoGamePrototype.Engine
             string fileName = Data.LevelPath + levelName;
             string jsonString = File.ReadAllText(fileName);
             return JsonSerializer.Deserialize<Tile[]>(jsonString);
+        }
+
+        public void SaveLevel(string levelName, List<Tile> tiles)
+        {
+            string fileName = Data.LevelPath + levelName + ".json";
+            string jsonString = JsonSerializer.Serialize(tiles);
+            File.WriteAllText(fileName, jsonString);
         }
     }
 }

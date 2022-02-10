@@ -3,7 +3,6 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGamePrototype.Engine;
-using System;
 using System.Collections.Generic;
 
 namespace MonoGamePrototype.Editor

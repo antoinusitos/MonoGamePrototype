@@ -13,3 +13,5 @@ Narration
 House (with upper floor)
 AI
 Put the json levels in the bin folder
+Load level in Level Editor
+Change Layer in Level Editor

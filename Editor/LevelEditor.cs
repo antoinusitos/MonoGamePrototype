@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Input;
 
 namespace MonoGamePrototype.Editor
 {
@@ -81,6 +82,13 @@ namespace MonoGamePrototype.Editor
 
                 int tileCurrentIndex = (y * levelSizeX + x);
                 generatedTiles[tileCurrentIndex].UpdateTexture(levelEditorMenuUI.GetSelectedTile(), contentManager);
+            }
+
+            if(InputManager.instance.GetKeyboardDown(Keys.LeftControl) && InputManager.instance.GetKeyboardPressed(Keys.S))
+            {
+                //Save the map
+                LevelLoadingManager.instance.SaveLevel("testMap", generatedTiles);
+                levelEditorMenuUI.UpdateMapName("testMap");
             }
         }
 

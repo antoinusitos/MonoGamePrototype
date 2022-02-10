@@ -1,7 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using MonoGamePrototype.Engine;
-using System;
 
 namespace MonoGamePrototype.Editor
 {
@@ -64,6 +62,11 @@ namespace MonoGamePrototype.Editor
         public bool GetIsOnPanel()
         {
             return tilePanel.IsInside();
+        }
+
+        public void UpdateMapName(string aName)
+        {
+            levelNameText.text = "Level Name : " + aName;
         }
     }
 }
