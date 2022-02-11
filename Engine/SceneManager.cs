@@ -44,5 +44,10 @@ namespace MonoGamePrototype.Engine
             if (currentLevel != null)
                 currentLevel.Draw(spriteBatch);
         }
+
+        public Level GetCurrentLevel()
+        {
+            return currentLevel;
+        }
     }
 }

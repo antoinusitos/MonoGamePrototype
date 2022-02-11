@@ -12,16 +12,18 @@ namespace MonoGamePrototype.Gameplay.Menu
 
         public override void Initialize()
         {
-            entityTexts = new EntityText[4];
+            entityTexts = new EntityText[5];
 
             float offset = 150.0f;
 
             float centerX = Data.Width / 2.0f;
+            //float centerY = Data.Height * 0.5f;
+            float centerY = Data.Height * 0.2f;
 
             entityTexts[0] = new EntityText("New Game")
             {
                 positionX = centerX,
-                positionY = Data.Height * 0.5f,
+                positionY = centerY,
                 textAlign = TextAlign.CENTER,
                 textType = TextType.TITLE
             };
@@ -29,7 +31,7 @@ namespace MonoGamePrototype.Gameplay.Menu
             entityTexts[1] = new EntityText("Options")
             {
                 positionX = centerX,
-                positionY = Data.Height * 0.5f + offset,
+                positionY = centerY + offset,
                 textAlign = TextAlign.CENTER,
                 textType = TextType.TITLE
             };
@@ -37,7 +39,7 @@ namespace MonoGamePrototype.Gameplay.Menu
             entityTexts[2] = new EntityText("Exit")
             {
                 positionX = centerX,
-                positionY = Data.Height * 0.5f + offset * 2,
+                positionY = centerY + offset * 2,
                 textAlign = TextAlign.CENTER,
                 textType = TextType.TITLE
             };
@@ -45,7 +47,15 @@ namespace MonoGamePrototype.Gameplay.Menu
             entityTexts[3] = new EntityText("Level Editor")
             {
                 positionX = centerX,
-                positionY = Data.Height * 0.5f + offset * 3,
+                positionY = centerY + offset * 3,
+                textAlign = TextAlign.CENTER,
+                textType = TextType.TITLE
+            };
+
+            entityTexts[4] = new EntityText("Test Level")
+            {
+                positionX = centerX,
+                positionY = centerY + offset * 4,
                 textAlign = TextAlign.CENTER,
                 textType = TextType.TITLE
             };
@@ -75,7 +85,7 @@ namespace MonoGamePrototype.Gameplay.Menu
                 {
                     UIManager.instance.ClearEntities();
                     GameManager.instance.SetGameState(GameManager.GameState.GAME);
-                    FirstLevel firstLevel = new FirstLevel("First Level");
+                    FirstLevel firstLevel = new FirstLevel("Level1");
                     SceneManager.instance.SetLevel(firstLevel);
                 }
                 else if (menuIndex == 1)
@@ -99,6 +109,13 @@ namespace MonoGamePrototype.Gameplay.Menu
                     GameManager.instance.SetGameState(GameManager.GameState.LEVELEDITOR);
                     LevelEditor levelEditor = new LevelEditor();
                     SceneManager.instance.SetLevel(levelEditor);
+                }
+                else if (menuIndex == 4)
+                {
+                    UIManager.instance.ClearEntities();
+                    GameManager.instance.SetGameState(GameManager.GameState.GAME);
+                    Level level = new FirstLevel("testMap");
+                    SceneManager.instance.SetLevel(level);
                 }
             }
         }

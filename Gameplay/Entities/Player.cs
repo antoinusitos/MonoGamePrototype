@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using MonoGamePrototype.Engine;
+using System;
 
 namespace MonoGamePrototype.Gameplay.Entities
 {
@@ -50,6 +51,7 @@ namespace MonoGamePrototype.Gameplay.Entities
         {
             Vector2 mousePos = InputManager.instance.GetMousePosition();
             mousePos = Data.ScreenToWorldSpace(mousePos);
+
             Vector2 pos = new Vector2(positionX, positionY);
             Vector2 dir = mousePos - pos;
             dir.Normalize();

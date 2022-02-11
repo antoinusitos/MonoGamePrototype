@@ -72,5 +72,13 @@ namespace MonoGamePrototype.Engine
             else
                 return currentMouseState.RightButton == ButtonState.Pressed && previousMouseState.RightButton == ButtonState.Released;
         }
+
+        public bool GetMouseButtonReleased(int index)
+        {
+            if (index == 0)
+                return currentMouseState.LeftButton == ButtonState.Released && previousMouseState.LeftButton == ButtonState.Pressed;
+            else
+                return currentMouseState.RightButton == ButtonState.Released && previousMouseState.RightButton == ButtonState.Pressed;
+        }
     }
 }
