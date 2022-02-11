@@ -24,6 +24,10 @@ namespace MonoGamePrototype.Engine
 
         public string texturePath { get; set; } = "";
 
+        public Rectangle collision { get; set; }
+
+        public bool hasCollision { get; set; } = false;
+
         public Entity()
         {
             originX = originY = Data.TileSize / 2.0f;

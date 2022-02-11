@@ -9,6 +9,8 @@ namespace MonoGamePrototype.Gameplay.Entities
     {
         private float speed { get; set; } = 0.3f;
 
+        private Vector2 lastMovement { get; set; } = Vector2.Zero;
+
         public Player(string path) : base()
         {
             texturePath = path;
@@ -26,23 +28,27 @@ namespace MonoGamePrototype.Gameplay.Entities
             if (GameManager.instance.currentGameState != GameManager.GameState.GAME)
                 return;
 
+            Vector2 movement = Vector2.Zero;
+
             if (InputManager.instance.GetKeyboardDown(Keys.D))
             {
-                positionX += gameTime.ElapsedGameTime.Milliseconds * speed;
+                movement.X += gameTime.ElapsedGameTime.Milliseconds * speed;
             }
             else if (InputManager.instance.GetKeyboardDown(Keys.Q))
             {
-                positionX -= gameTime.ElapsedGameTime.Milliseconds * speed;
+                movement.X -= gameTime.ElapsedGameTime.Milliseconds * speed;
             }
 
             if (InputManager.instance.GetKeyboardDown(Keys.Z))
             {
-                positionY -= gameTime.ElapsedGameTime.Milliseconds * speed;
+                movement.Y -= gameTime.ElapsedGameTime.Milliseconds * speed;
             }
             else if (InputManager.instance.GetKeyboardDown(Keys.S))
             {
-                positionY += gameTime.ElapsedGameTime.Milliseconds * speed;
+                movement.Y += gameTime.ElapsedGameTime.Milliseconds * speed;
             }
+
+            lastMovement = movement;
 
             LookAtCursor();
         }

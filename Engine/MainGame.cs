@@ -24,6 +24,8 @@ namespace MonoGamePrototype.Engine
 
         private LevelLoadingManager levelLoadingManager { get; set; } = null;
 
+        private CollisionManager collisionManager { get; set; } = null;
+
         private Level currentLevel { get; set; } = null;
 
         private bool started { get; set; } = false;
@@ -47,6 +49,7 @@ namespace MonoGamePrototype.Engine
             gameManager = new GameManager();
             cameraManager = new CameraManager();
             levelLoadingManager = new LevelLoadingManager();
+            collisionManager = new CollisionManager();
 
             currentLevel = new LevelMenu("Main Menu");
         }
@@ -66,6 +69,7 @@ namespace MonoGamePrototype.Engine
             gameManager.Initialize();
             cameraManager.Initialize();
             levelLoadingManager.Initialize();
+            collisionManager.Initialize();
 
             currentLevel.Initialize();
 
@@ -81,6 +85,7 @@ namespace MonoGamePrototype.Engine
             sceneManager.LoadContent(Content);
             gameManager.LoadContent(Content);
             cameraManager.LoadContent(Content);
+            collisionManager.LoadContent(Content);
 
             // TODO: use this.Content to load your game content here
         }
@@ -101,6 +106,8 @@ namespace MonoGamePrototype.Engine
 
                 cameraManager.Start();
 
+                collisionManager.Start();
+
                 started = true;
 
                 startTime.Stop();
@@ -118,6 +125,8 @@ namespace MonoGamePrototype.Engine
 
             uiManager.Update(gameTime);
             // TODO: Add your update logic here
+
+            collisionManager.Update(gameTime);
 
             base.Update(gameTime);
         }
