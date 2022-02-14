@@ -5,7 +5,16 @@ namespace MonoGamePrototype.Engine
 {
     public class CollisionManager : Manager
     {
+        public static CollisionManager instance { get; set; } = null;
+
         private List<Entity> collidableEntities { get; set; } = new List<Entity>();
+
+        public override void Initialize()
+        {
+            base.Initialize();
+
+            instance = this;
+        }
 
         public void AddEntity(Entity entity)
         {
@@ -33,6 +42,26 @@ namespace MonoGamePrototype.Engine
             }
 
             return false;
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+
+            for (int i = 0; i < collidableEntities.Count; i++)
+            {
+                if(collidableEntities[i].isDirty)
+                {
+                    if(CheckCollision(collidableEntities[i]))
+                    {
+                        collidableEntities[i].RevertMovement();
+                    }
+                    else
+                    {
+                        collidableEntities[i].CleanDirtyFlag();
+                    }
+                }
+            }
         }
     }
 }

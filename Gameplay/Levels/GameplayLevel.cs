@@ -59,6 +59,7 @@ namespace MonoGamePrototype.Gameplay.Levels
                 AddEntity(tiles[i]);
             }
 
+            CollisionManager.instance.AddEntity(player);
         }
 
         public override void Update(GameTime gameTime)
@@ -96,6 +97,11 @@ namespace MonoGamePrototype.Gameplay.Levels
                 for (int i = 0; i < loadedTiles.Length; i++)
                 {
                     tiles.Add(loadedTiles[i]);
+
+                    if(loadedTiles[i].texturePath == "Tiles/tile_138")
+                    {
+                        CollisionManager.instance.AddEntity(loadedTiles[i]);
+                    }
                 }
 
                 return;

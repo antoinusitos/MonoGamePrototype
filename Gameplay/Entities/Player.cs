@@ -50,7 +50,22 @@ namespace MonoGamePrototype.Gameplay.Entities
 
             lastMovement = movement;
 
+            positionX += movement.X;
+            positionY += movement.Y;
+
+            isDirty = true;
+
             LookAtCursor();
+        }
+
+        public override void RevertMovement()
+        {
+            base.RevertMovement();
+
+            positionX -= lastMovement.X;
+            positionY -= lastMovement.Y;
+            lastMovement = Vector2.Zero;
+            isDirty = false;
         }
 
         private void LookAtCursor()

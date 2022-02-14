@@ -28,6 +28,8 @@ namespace MonoGamePrototype.Engine
 
         public bool hasCollision { get; set; } = false;
 
+        public bool isDirty { get; set; } = false;
+
         public Entity()
         {
             originX = originY = Data.TileSize / 2.0f;
@@ -65,6 +67,16 @@ namespace MonoGamePrototype.Engine
                 new Vector2(scaleX, scaleY),
                 SpriteEffects.None,
                 zOrder / 100.0f);
+        }
+
+        public virtual void RevertMovement()
+        {
+            CleanDirtyFlag();
+        }
+
+        public void CleanDirtyFlag()
+        {
+            isDirty = false;
         }
     }
 }
